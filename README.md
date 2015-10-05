@@ -1,2 +1,2 @@
 # jolly-jumper
-be jolly play jolly 
+**Its a temporary testing repo for the game. **
