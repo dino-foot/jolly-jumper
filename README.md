@@ -1,2 +1,2 @@
 # jolly-jumper
-**Its a temporary testing repo for the game. **
+**Its a temporary testing repo for the game.**
