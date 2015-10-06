@@ -36,8 +36,8 @@ var platform = function(game){
         
         platformCreate: function(){
             var platform = this.pltGroup.getFirstDead();
-            var x = game.rnd.integerInRange(-40,game.world.width-90);
-            var y = this.pltYMin-(game.rnd.integerInRange(180,200));
+            var x = game.rnd.integerInRange(-40,game.world.width-100);
+            var y = this.pltYMin-(game.rnd.integerInRange(170,180));
             platform.reset(x,y);
             platform.body.immovable = true;
             return;
