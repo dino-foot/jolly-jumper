@@ -27,8 +27,8 @@ var player = function(game){
             
             game.world.setBounds(0,-this.yChange,game.world.width,game.height+this.yChange);
             this.cameraYMin = Math.min(this.cameraYMin,this.player.y-game.height+300);
-            //game.camera.y -= 1.5;
-            game.camera.y = this.cameraYMin;
+            game.camera.y -= 1;
+            //game.camera.y = this.cameraYMin;
            // console.log('y :'+this.cameraYMin);
         },
         
@@ -36,7 +36,7 @@ var player = function(game){
             var standing  = this.player.body.touching.down || this.player.body.blocked.down;
             
             if(this.jumpButton.isDown && standing==true){
-                this.player.body.velocity.y = -400;
+                this.player.body.velocity.y = -380;
             }
             else if(this.cursor.left.isDown){
                 this.player.body.velocity.x = -100;
