@@ -16,7 +16,7 @@ var bootState = function(game){
                 this.scale.pageAlignVertically = true;
                 this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.scale.setGameSize(this.game.width,this.game.height);
-                this.scale.setMinMax(220,420,350,550); // (minwidth,minheight,maxwidth,maxheight)
+                this.scale.setMinMax(220,420,320,550); // (minwidth,minheight,maxwidth,maxheight)
                 this.scale.updateLayout(true);
                 this.scale.refresh();
                 
@@ -48,7 +48,7 @@ var bootState = function(game){
         
         preload: function(){
            // loading bar goes here
-        // this.load.atlasXML('jump','assets/player/jump.png','assets/player/jump.xml');
+        
         },
         
         create: function(){
