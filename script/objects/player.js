@@ -3,17 +3,19 @@ var player = function(game){
     this.player;
     this.cursor;
     this.jumpButton;
+    this.flag;
 };
 
     player.prototype = {
         
         create: function(){ 
-            this.player = game.add.sprite(game.world.centerX,game.world.centerY,'jolly',0);
+            this.player = game.add.sprite(game.world.centerX,game.world.centerY,'jolly',1);
             this.player.anchor.setTo(0.5,0.5);
             game.physics.arcade.enable(this.player);
-            this.player.body.setSize(42,110,0,2);
+            this.player.body.setSize(25,55,0,0);
             this.player.body.collideWorldBounds = true;
-            this.player.body.gravity.set(0,400);     
+            this.player.body.gravity.set(0,game.rnd.integerInRange(500,800));//can make game harder
+            this.player.body.bounce.set(1,game.rnd.realInRange(1,2));
             
             this.jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             this.cursor = game.input.keyboard.createCursorKeys();
@@ -27,37 +29,33 @@ var player = function(game){
             
             game.world.setBounds(0,-this.yChange,game.world.width,game.height+this.yChange);
             this.cameraYMin = Math.min(this.cameraYMin,this.player.y-game.height+300);
-            game.camera.y -= 1;
-            //game.camera.y = this.cameraYMin;
-           // console.log('y :'+this.cameraYMin);
+            //game.camera.y -= 1;
+            game.camera.y = this.cameraYMin;
         },
         
         handleMovement: function(){
             var standing  = this.player.body.touching.down || this.player.body.blocked.down;
             
             if(this.jumpButton.isDown && standing==true){
-                this.player.body.velocity.y = -380;
+                this.player.frame = 0;
+                this.player.body.velocity.y = -400;
             }
             else if(this.cursor.left.isDown){
-                this.player.body.velocity.x = -100;
+                this.player.frame = 4;
+                this.player.body.velocity.x = -200;
             }
             else if(this.cursor.right.isDown){
-                this.player.body.velocity.x = 100;
+                this.player.frame = 3;   
+                this.player.body.velocity.x = 200;
             }
             else{
+                this.player.frame = 1;
                 this.player.body.velocity.x = 0;
             }
-            
-            if(standing == false)
-                this.player.frame = 1;
-            else 
-              this.player.frame = 0;  
             
             // track the maximum amount that hero has traveled
             var t1 = Math.abs(this.player.y);     
             this.yChange = Math.max(Math.abs(t1+this.yOrig)+2000);
-            //console.log('p :'+this.player.y);
-            
         },
         
         render: function(){

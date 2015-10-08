@@ -1,13 +1,14 @@
 var playState = function(game){
     this.background = null;
     this.hidden = null;
+    this.platforms = null;
 };
 
     playState.prototype = {
         
         create: function(){
             console.log(game.state.getCurrentState());
-           // this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
+            //this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
             
@@ -16,11 +17,10 @@ var playState = function(game){
             
           this.platforms = new platform(game);
           this.platforms.create();    
-          this.platforms.randomPlatform();      
+          this.platforms.initialPlatforms();      
              
           this.jolly = new player(game);
           this.jolly.create();
-          this.camera.unfollow();
         },
 
         update: function(){
@@ -43,8 +43,8 @@ var playState = function(game){
         },
         
         render: function(){
-             // this.jolly.render();
-            //  this.platforms.render();
+              //this.jolly.render();
+              //this.platforms.render();
               //this.background.render();   
               //this.game.debug.cameraInfo(this.camera,32,250,'#2d2d2d');    
         }   

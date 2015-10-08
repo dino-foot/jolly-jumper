@@ -6,27 +6,28 @@ var platform = function(game){
     platform.prototype = {
         create: function(){
            this.pltGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
-           this.pltGroup.createMultiple(6,'platform2',null,false); // false - dead
+           this.pltGroup.createMultiple(7,'platform',null,false); // false - dead
            
-           this.pltGroup.setAll('anchor.setTo',0.5);
+          // this.pltGroup.setAll('anchor.setTo',0.5,0.5);
            this.pltGroup.setAll('body.immovable',true);
            this.pltGroup.setAll('body.checkCollision.down',false); 
            this.pltGroup.setAll('body.checkCollision.left',false);
            this.pltGroup.setAll('body.checkCollision.right',false);
-           this.pltGroup.callAll('body.setSize','body',110,20,20,-5); 
+           this.pltGroup.callAll('body.setSize','body',80,25,10,0);
         },
-        
-        randomPlatform: function(){
-           for(var i=0;i<=this.pltGroup.countDead();i++){
-               var plt = this.pltGroup.getFirstDead();
-               plt.reset(50*i,180*i);
-           }
+            
+        initialPlatforms: function(){
+            var platform;
+            for(var i=1;i<=4;i++){
+                platform = this.pltGroup.getFirstDead();
+                platform.body.immovable = true;
+                platform.anchor.setTo(0.5,0.5);
+                platform.reset(60*i,120*i);
+            }
         },
         
         handlePlatform: function(elem){
             this.pltYMin = Math.min(this.pltYMin,elem.y);
-            //console.log('platform: '+this.pltYMin);
-            //console.log('elem: '+elem.y);
             
             if(elem.y>game.camera.y+game.height){
                 elem.kill();
@@ -35,12 +36,14 @@ var platform = function(game){
         },
         
         platformCreate: function(){
+          for(var i=1;i<=this.pltGroup.countDead();i++){
             var platform = this.pltGroup.getFirstDead();
-            var x = game.rnd.integerInRange(-40,game.world.width-100);
-            var y = this.pltYMin-(game.rnd.integerInRange(170,180));
+            platform.body.immovable = true; 
+            platform.anchor.setTo(0.5,0.5);  
+            var x = game.rnd.integerInRange(50,300);
+            var y = this.pltYMin-(game.rnd.integerInRange(120,180));
             platform.reset(x,y);
-            platform.body.immovable = true;
-            return;
+          }
         },
         
         update: function(){
@@ -48,7 +51,9 @@ var platform = function(game){
         },
         
         render: function(){
-              //console.log('alive '+this.pltGroup.countLiving()+' dead '+this.pltGroup.countDead());
+               game.debug.text('alive '+this.pltGroup.countLiving()+' dead '+this.pltGroup.countDead(),32,160);    
+              
+            game.debug.text(this.pltYMin,32,180);        
         }
         
     }

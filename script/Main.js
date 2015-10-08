@@ -14,7 +14,6 @@
     game.global = {
         score: 0,
         sound: null,
-        playButton: null
     }    
 
 

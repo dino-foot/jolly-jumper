@@ -8,17 +8,18 @@ var loadState = function(game){
           console.log(game.state.getCurrentState());
           
           // load all objcet 
-          this.load.image('background','assets/bg3.png');
+          this.load.image('background','assets/bg.png');
           this.load.image('cactus','assets/cactus.png');
           
-          this.load.image('platform2','assets/platform2.png');
+         // this.load.image('platform2','assets/broken.png');
+          this.load.image('platform','assets/platform.png');
           
           //load fruties
           
           // load utility
           
           // load player
-          this.load.spritesheet('jolly','assets/player/jolly.png',95,144);
+           this.load.spritesheet('jolly','assets/player/monkey.png',63,78);
           
           // load buttons
           this.load.spritesheet('play','assets/play.png',124,50);
