@@ -14,8 +14,8 @@ var player = function(game){
             game.physics.arcade.enable(this.player);
             this.player.body.setSize(25,55,0,0);
             this.player.body.collideWorldBounds = true;
-            this.player.body.gravity.set(0,game.rnd.integerInRange(500,800));//can make game harder
-            this.player.body.bounce.set(1,game.rnd.realInRange(1,2));
+            this.player.body.gravity.set(0,game.rnd.integerInRange(500,800));
+            this.handleBounce(2);
             
             this.jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             this.cursor = game.input.keyboard.createCursorKeys();
@@ -23,6 +23,10 @@ var player = function(game){
             this.yOrig = this.player.y;
             this.yChange = 0;
             this.cameraYMin = 99999;
+        },
+        
+        handleBounce: function(i){
+              this.player.body.bounce.set(1,i);    
         },
         
         update: function(){
@@ -34,19 +38,19 @@ var player = function(game){
         },
         
         handleMovement: function(){
-            var standing  = this.player.body.touching.down || this.player.body.blocked.down;
+            this.standing = this.player.body.touching.down || this.player.body.blocked.down;
             
-            if(this.jumpButton.isDown && standing==true){
+            if(this.jumpButton.isDown && this.standing==true){
                 this.player.frame = 0;
-                this.player.body.velocity.y = -400;
+                this.player.body.velocity.y = -500;
             }
             else if(this.cursor.left.isDown){
                 this.player.frame = 4;
-                this.player.body.velocity.x = -200;
+                this.player.body.velocity.x = -150;
             }
             else if(this.cursor.right.isDown){
                 this.player.frame = 3;   
-                this.player.body.velocity.x = 200;
+                this.player.body.velocity.x = 150;
             }
             else{
                 this.player.frame = 1;
@@ -61,5 +65,6 @@ var player = function(game){
         render: function(){
             game.debug.bodyInfo(this.player,32,32);
             game.debug.body(this.player);
+            game.debug.text(this.standing,32,64);
         }
     } 
