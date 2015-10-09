@@ -6,9 +6,8 @@ var platform = function(game){
     platform.prototype = {
         create: function(){
            this.pltGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
-           this.pltGroup.createMultiple(7,'platform',null,false); // false - dead
+           this.pltGroup.createMultiple(6,'platform',null,false); // false - dead
            
-          // this.pltGroup.setAll('anchor.setTo',0.5,0.5);
            this.pltGroup.setAll('body.immovable',true);
            this.pltGroup.setAll('body.checkCollision.down',false); 
            this.pltGroup.setAll('body.checkCollision.left',false);
@@ -18,7 +17,7 @@ var platform = function(game){
             
         initialPlatforms: function(){
             var platform;
-            for(var i=1;i<=4;i++){
+            for(var i=1;i<=5;i++){
                 platform = this.pltGroup.getFirstDead();
                 platform.body.immovable = true;
                 platform.anchor.setTo(0.5,0.5);
@@ -36,14 +35,14 @@ var platform = function(game){
         },
         
         platformCreate: function(){
-          for(var i=1;i<=this.pltGroup.countDead();i++){
+         
             var platform = this.pltGroup.getFirstDead();
             platform.body.immovable = true; 
             platform.anchor.setTo(0.5,0.5);  
             var x = game.rnd.integerInRange(50,300);
-            var y = this.pltYMin-(game.rnd.integerInRange(120,180));
+            var y = this.pltYMin-(game.rnd.integerInRange(100,180));
             platform.reset(x,y);
-          }
+            return;  
         },
         
         update: function(){
