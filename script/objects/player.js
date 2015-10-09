@@ -65,6 +65,6 @@ var player = function(game){
         render: function(){
             game.debug.bodyInfo(this.player,32,32);
             game.debug.body(this.player);
-            game.debug.text(this.standing,32,64);
+            game.debug.text(this.standing,62,135); //return false when air
         }
     } 
