@@ -15,7 +15,7 @@ var player = function(game){
             this.player.body.setSize(25,55,0,0);
             this.player.body.collideWorldBounds = true;
             this.player.body.gravity.set(0,game.rnd.integerInRange(500,800));
-            this.handleBounce(2);
+            //this.handleBounce(2);
             
             this.jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             this.cursor = game.input.keyboard.createCursorKeys();

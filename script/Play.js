@@ -26,10 +26,16 @@ var playState = function(game){
         update: function(){
             this.jolly.update();
             this.physics.arcade.collide(this.jolly.player,this.background.cactus,this.gameOver,null,this);
-            this.physics.arcade.collide(this.jolly.player,this.platforms.pltGroup);
+            this.physics.arcade.collide(this.jolly.player,this.platforms.pltGroup,this.playerVsPlatform,null,this);
             this.jolly.handleMovement();
                          
             this.platforms.update();    
+        },
+        
+        playerVsPlatform: function(){
+            //console.log('collide');
+            this.jolly.player.body.velocity.y -= this.rnd.integerInRange(500,650);
+            console.log(this.jolly.player.body.velocity.y);
         },
         
          gameOver: function(){
