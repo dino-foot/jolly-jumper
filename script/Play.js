@@ -21,6 +21,11 @@ var playState = function(game){
              
           this.jolly = new player(game);
           this.jolly.create();
+            
+          this.fruits = new fruits(game);
+          this.fruits.create();
+          this.fruits.update();          
+          
         },
 
         update: function(){
@@ -33,9 +38,8 @@ var playState = function(game){
         },
         
         playerVsPlatform: function(){
-            //console.log('collide');
             this.jolly.player.body.velocity.y -= this.rnd.integerInRange(500,650);
-            console.log(this.jolly.player.body.velocity.y);
+            //console.log(this.jolly.player.body.velocity.y);
         },
         
          gameOver: function(){
@@ -51,8 +55,9 @@ var playState = function(game){
         render: function(){
               //this.jolly.render();
               //this.platforms.render();
-              //this.background.render();   
-              //this.game.debug.cameraInfo(this.camera,32,250,'#2d2d2d');    
+              //this.background.render();
+              this.fruits.render();    
+              this.game.debug.cameraInfo(this.camera,32,250,'#2d2d2d');    
         }   
         
     }
