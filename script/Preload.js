@@ -15,12 +15,11 @@ var loadState = function(game){
           this.load.image('platform','assets/platform.png');
           
           //load fruties
-          this.load.image('banana00','assets/fruits/banana_00.png');
-          this.load.image('banana01','assets/fruits/banana_01.png');
-          this.load.image('grape','assets/fruits/grape.png');
-          this.load.image('pineapple','assets/fruits/pineapple.png');
-          this.load.image('watermelon','assets/fruits/watermelon.png');
-          this.load.image('cherry','assets/fruits/cherry.png');
+          this.load.image('fruit0','assets/fruits/banana_01.png');
+          this.load.image('fruit1','assets/fruits/grape.png');
+          this.load.image('fruit2','assets/fruits/pineapple.png');
+          this.load.image('fruit3','assets/fruits/watermelon.png');
+          this.load.image('fruit4','assets/fruits/cherry.png');
           // load utility
           
           // load player
