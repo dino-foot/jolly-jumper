@@ -59,7 +59,7 @@ var playState = function(game){
               //this.jolly.render();
               //this.platforms.render();
               //this.background.render();
-              this.fruits.render();    
+             // this.fruits.render();    
             //  this.game.debug.cameraInfo(this.camera,32,160,'#2d2d2d');    
         }   
         
