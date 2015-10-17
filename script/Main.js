@@ -14,6 +14,8 @@
     game.global = {
         score: 0,
         sound: null,
+        flag: false, 
+        pltYMin: null
     }    
 
 
