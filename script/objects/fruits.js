@@ -16,7 +16,7 @@ var fruits = function(game){
             this.fruitsGroup.createMultiple(3,'fruit3',null,false);
             this.fruitsGroup.createMultiple(3,'fruit4',null,false);
             
-            this.fruitsGroup.setAll('anchor.setTo',0.5,0.5);
+           // this.fruitsGroup.setAll('anchor.setTo',0.5,0.5);
             this.fruitsGroup.setAll('body.immovable',true);
             
             //this.initialFruits();
@@ -24,7 +24,7 @@ var fruits = function(game){
         
         initialFruits: function(){
            var fruit;
-            for(var i=1;i<=15;i++){
+            for(var i=1;i<=10;i++){
                 fruit = this.fruitsGroup.getFirstDead();
                 fruit.anchor.setTo(0.5,0.5);
                 var x = game.rnd.integerInRange(30,320);
@@ -37,9 +37,8 @@ var fruits = function(game){
         var flag = false;
         this.min = game.camera.y;
         this.max = game.camera.y+game.height;
-        this.y = game.rnd.integerInRange(this.min,this.min-100);
-        this.x = game.rnd.integerInRange(30,330);    
-            var kill = Math.abs(this.max);
+        this.y = game.rnd.integerInRange(this.min,this.min-200);
+        this.x = game.rnd.integerInRange(20,330);    
             
             if(elem.y>game.height+game.camera.y){
                // console.log(elem.y+' killed '+this.max);
@@ -52,9 +51,11 @@ var fruits = function(game){
         createFruits: function(elem){
             var tmp = this.fruitsGroup.getFirstDead();
             if(tmp){
-                tmp.reset(this.x,this.y);
+                //tmp = this.fruitsGroup.getRandom(0,10);
+                elem.anchor.setTo(0.5,0.5);
+                elem.reset(this.x,this.y);
             }
-            
+            return;
         },
         
         update: function(){
