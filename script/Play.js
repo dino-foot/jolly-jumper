@@ -8,7 +8,7 @@ var playState = function(game){
         
         create: function(){
             console.log(game.state.getCurrentState());
-            //this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
+            this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
             
@@ -24,7 +24,7 @@ var playState = function(game){
             
           this.fruits = new fruits(game);
           this.fruits.create();
-          this.fruits.update();          
+          this.fruits.initialFruits();    
           
         },
 
@@ -34,7 +34,10 @@ var playState = function(game){
             this.physics.arcade.collide(this.jolly.player,this.platforms.pltGroup,this.playerVsPlatform,null,this);
             this.jolly.handleMovement();
                          
-            this.platforms.update();    
+            this.platforms.update(); 
+            
+            // handle fruits
+            this.fruits.update();
         },
         
         playerVsPlatform: function(){
@@ -53,11 +56,11 @@ var playState = function(game){
         },
         
         render: function(){
-              //this.jolly.render();
+              this.jolly.render();
               //this.platforms.render();
               //this.background.render();
               this.fruits.render();    
-              this.game.debug.cameraInfo(this.camera,32,250,'#2d2d2d');    
+            //  this.game.debug.cameraInfo(this.camera,32,160,'#2d2d2d');    
         }   
         
     }

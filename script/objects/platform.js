@@ -1,7 +1,10 @@
 var platform = function(game){
     this.pltGroup = null;
-    this.pltYMin = 99999;
+    //this.pltYMin = 99999;
+    game.global.pltYMin = 99999;
 };
+
+
 
     platform.prototype = {
         create: function(){
@@ -26,7 +29,7 @@ var platform = function(game){
         },
         
         handlePlatform: function(elem){
-            this.pltYMin = Math.min(this.pltYMin,elem.y);
+            game.global.pltYMin  = Math.min(game.global.pltYMin ,elem.y);
             
             if(elem.y>game.camera.y+game.height){
                 elem.kill();
@@ -40,7 +43,7 @@ var platform = function(game){
             platform.body.immovable = true; 
             platform.anchor.setTo(0.5,0.5);  
             var x = game.rnd.integerInRange(50,300);
-            var y = this.pltYMin-(game.rnd.integerInRange(100,180));
+            var y = game.global.pltYMin - (game.rnd.integerInRange(100,180));
             platform.reset(x,y);
             return;  
         },
@@ -52,7 +55,7 @@ var platform = function(game){
         render: function(){
                game.debug.text('alive '+this.pltGroup.countLiving()+' dead '+this.pltGroup.countDead(),32,160);    
               
-            game.debug.text(this.pltYMin,32,180);        
+            game.debug.text(game.global.pltYMin ,32,180);        
         }
         
     }
