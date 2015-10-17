@@ -8,7 +8,7 @@ var playState = function(game){
         
         create: function(){
             console.log(game.state.getCurrentState());
-            this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
+            //this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
             
@@ -56,7 +56,7 @@ var playState = function(game){
         },
         
         render: function(){
-              this.jolly.render();
+              //this.jolly.render();
               //this.platforms.render();
               //this.background.render();
               this.fruits.render();    
