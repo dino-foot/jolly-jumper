@@ -10,11 +10,11 @@ var fruits = function(game){
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
-            this.fruitsGroup.createMultiple(4,'fruit0',null,false);
+            this.fruitsGroup.createMultiple(3,'fruit0',null,false);
             this.fruitsGroup.createMultiple(3,'fruit1',null,false);
-            this.fruitsGroup.createMultiple(5,'fruit2',null,false);
+            this.fruitsGroup.createMultiple(3,'fruit2',null,false);
             this.fruitsGroup.createMultiple(3,'fruit3',null,false);
-            this.fruitsGroup.createMultiple(5,'fruit4',null,false);
+            this.fruitsGroup.createMultiple(3,'fruit4',null,false);
 
             this.fruitsGroup.setAll('anchor.setTo',0.5,0.5);
             this.fruitsGroup.setAll('body.immovable',true);
@@ -32,24 +32,25 @@ var fruits = function(game){
                 var y = game.rnd.integerInRange(20,400);
                 fruit.reset(x,y);
             }
-            this.shuffleArray(this.fruitsGroup);
         },
 
         handleFruits: function(elem){
+
+        this.min = game.camera.y;
+        this.max = game.camera.y+game.height;
+        this.y = game.rnd.integerInRange(this.min,this.min-400);
+        this.x = game.rnd.integerInRange(10,330);
+
             if(elem.y>game.height+game.camera.y){
                 elem.kill();
+                this.shuffleArray(this.fruitsGroup);
                 this.fruitsGroup.forEachDead(this.createFruits,this);
             }
 
         },
 
         createFruits: function(elem){
-            
-            this.min = game.camera.y;
-            this.max = game.camera.y+game.height;
-            this.y = game.rnd.integerInRange(this.min,this.min-300);
-            this.x = game.rnd.integerInRange(10,340);
-            
+
             var tmp = this.fruitsGroup.getFirstDead();
             if(tmp){
                 //tmp = this.fruitsGroup.getRandom(0,10);
