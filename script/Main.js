@@ -13,7 +13,7 @@
     //define global var
     game.global = {
         score: 0,
-        sound: null,
+        fruitSound: null,
         flag: false, 
         pltYMin: null
     }    

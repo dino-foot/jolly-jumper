@@ -45,6 +45,7 @@ var playState = function(game){
         
         playerVsFruits: function(player,fruit){
             fruit.kill();
+            this.fruits.fruitSound.play();
             
         },
         

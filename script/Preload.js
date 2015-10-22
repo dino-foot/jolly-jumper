@@ -29,6 +29,9 @@ var loadState = function(game){
           this.load.spritesheet('play','assets/play.png',124,50);
           this.load.spritesheet('help','assets/help.png',124,50);
           this.load.spritesheet('credit','assets/credit.png',124,50);
+          
+          // sounds
+          this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg'],true);
       },
       
       create: function(){

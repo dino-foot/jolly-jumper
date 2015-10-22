@@ -20,6 +20,8 @@ var fruits = function(game){
             this.fruitsGroup.setAll('body.immovable',true);
             this.fruitsGroup.callAll('body.setSize','body',25,25,0,2);
             
+            this.fruitSound = game.add.audio('fruitGulp',1,false);
+            
         },
 
         initialFruits: function(){
@@ -37,7 +39,7 @@ var fruits = function(game){
         this.min = game.camera.y;
         this.max = game.camera.y+game.height;
         this.y = game.rnd.integerInRange(this.min,this.min-400);
-        this.x = game.rnd.integerInRange(20,330);
+        this.x = game.rnd.integerInRange(10,330);
 
             if(elem.y>game.height+game.camera.y){
                 elem.kill();
