@@ -10,11 +10,14 @@ var fruits = function(game){
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
-            this.fruitsGroup.createMultiple(4,'fruit0',null,false);
+            this.fruitsGroup.createMultiple(2,'fruit0',null,false);
             this.fruitsGroup.createMultiple(3,'fruit1',null,false);
-            this.fruitsGroup.createMultiple(5,'fruit2',null,false);
+            this.fruitsGroup.createMultiple(3,'fruit2',null,false);
+            this.fruitsGroup.createMultiple(2,'fruit4',null,false);
+            this.fruitsGroup.createMultiple(2,'fruit2',null,false);
+            this.fruitsGroup.createMultiple(2,'fruit0',null,false);
             this.fruitsGroup.createMultiple(3,'fruit3',null,false);
-            this.fruitsGroup.createMultiple(5,'fruit4',null,false);
+            this.fruitsGroup.createMultiple(3,'fruit4',null,false);
 
             this.fruitsGroup.setAll('anchor.setTo',0.5,0.5);
             this.fruitsGroup.setAll('body.immovable',true);
