@@ -6,6 +6,8 @@ Temporary game testing Repository.
 
 http://shohan4556.github.io/jolly-jumper/
 
+Mozilla-firefox recommanded.
+
 ## Contributing
 
 1. Fork it!
