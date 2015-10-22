@@ -26,9 +26,9 @@ var fruits = function(game){
 
         initialFruits: function(){
            var fruit;
-            for(var i=1;i<=10;i++){
+            for(var i=1;i<=20;i++){
                 fruit = this.fruitsGroup.getFirstDead();
-                var x = game.rnd.integerInRange(30,320);
+                var x = game.rnd.integerInRange(20,330);
                 var y = game.rnd.integerInRange(20,400);
                 fruit.reset(x,y);
             }
