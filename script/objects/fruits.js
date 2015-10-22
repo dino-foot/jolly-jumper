@@ -19,6 +19,7 @@ var fruits = function(game){
             this.fruitsGroup.createMultiple(3,'fruit3',null,false);
             this.fruitsGroup.createMultiple(3,'fruit4',null,false);
 
+            this.shuffleArray(this.fruitsGroup);
             this.fruitsGroup.setAll('anchor.setTo',0.5,0.5);
             this.fruitsGroup.setAll('body.immovable',true);
             this.fruitsGroup.callAll('body.setSize','body',25,25,0,2);
@@ -35,7 +36,7 @@ var fruits = function(game){
                 var y = game.rnd.integerInRange(20,400);
                 fruit.reset(x,y);
             }
-            this.shuffleArray(this.fruitsGroup);
+            
         },
 
         handleFruits: function(elem){
