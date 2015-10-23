@@ -9,7 +9,7 @@ var playState = function(game){
         create: function(){
             console.log(game.state.getCurrentState());
             //this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
-
+            
             this.physics.startSystem(Phaser.Physics.ARCADE);
 
           this.background = new background(game);
@@ -42,19 +42,21 @@ var playState = function(game){
 
             // handle fruits
             this.fruits.update();
+    this.physics.arcade.overlap(this.jolly.player,this.fruits.fruitsGroup,this.playerVsFruits,null,this);
             
-            this.physics.arcade.overlap(this.jolly.player,this.fruits.fruitsGroup,this.playerVsFruits,null,this);
+            this.gameScore.update();
         },
         
         playerVsFruits: function(player,fruit){
             fruit.kill();
             this.fruits.fruitSound.play();
-            
+            game.global.score +=2;
+            //console.log('score: '+game.global.score);
         },
         
         playerVsPlatform: function(){
             this.jolly.player.body.velocity.y -= this.rnd.integerInRange(500,650);
-            //console.log(this.jolly.player.body.velocity.y);
+            
         },
 
          gameOver: function(){
@@ -72,7 +74,7 @@ var playState = function(game){
               //this.platforms.render();
               //this.background.render();
 
-                this.fruits.render();
+               // this.fruits.render();
             //  this.game.debug.cameraInfo(this.camera,32,160,'#2d2d2d');
              // this.fruits.render();    
             //  this.game.debug.cameraInfo(this.camera,32,160,'#2d2d2d');   
