@@ -26,6 +26,9 @@ var playState = function(game){
           this.fruits.create();
           this.fruits.initialFruits();
           
+            // scoring system
+          this.gameScore = new Score(game); 
+          this.gameScore.create();    
 
         },
 
