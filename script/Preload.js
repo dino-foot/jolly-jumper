@@ -11,7 +11,6 @@ var loadState = function(game){
           this.load.image('background','assets/bg.png');
           this.load.image('cactus','assets/cactus.png');
           
-         // this.load.image('platform2','assets/broken.png');
           this.load.image('platform','assets/platform.png');
           
           //load fruties
@@ -26,12 +25,17 @@ var loadState = function(game){
            this.load.spritesheet('jolly','assets/player/monkey.png',63,78);
           
           // load buttons
-          this.load.spritesheet('play','assets/play.png',124,50);
-          this.load.spritesheet('help','assets/help.png',124,50);
-          this.load.spritesheet('credit','assets/credit.png',124,50);
+           this.load.image('play','assets/GUI/play.png');    
+           this.load.image('setting','assets/GUI/setting.png');    
+           this.load.image('credit','assets/GUI/credit.png');    
+           this.load.image('howtoplay','assets/GUI/howToPlay.png');    
+           this.load.spritesheet('sound','assets/GUI/sound.png',70,60); 
+           this.load.spritesheet('music','assets/GUI/music.png',70,85); 
+          
           
           // sounds
           this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg'],true);
+          this.load.audio('menuBg',['sounds/menuBg.mp3','sounds/menuBgs.ogg'],true);
       },
       
       create: function(){

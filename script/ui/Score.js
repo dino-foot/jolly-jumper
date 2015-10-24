@@ -1,13 +1,14 @@
 var Score = function(game){
     game.global.score = 0;
+    this.currentScore = 0;
 };
 
 
     Score.prototype = {
       
-        create: function(){
-               
-               this.scoreBuffer = 0;     
+        create: function(){  
+            
+               this.currentScore = 0;     
                this.createScore(); 
                
         },
@@ -26,8 +27,10 @@ var Score = function(game){
         
         
         update: function(){
-         this.scoreLabel.text = game.global.score;      
-            
+           if(game.global.collideFlag == true){
+               this.scoreLabel.text = game.global.score;
+               this.scoreLabelTween.start();
+           }
         },
         
         render: function(){

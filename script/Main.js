@@ -14,7 +14,9 @@
     game.global = {
         score: 0,
         fruitSound: null,
-        flag: false, 
+        flag: false,
+        collideFlag: null,
+        menuBgSound: null,
         pltYMin: null
     }    
 

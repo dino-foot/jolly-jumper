@@ -1,3 +1,5 @@
+// Main game control script
+
 var playState = function(game){
     this.background = null;
     this.hidden = null;
@@ -11,7 +13,7 @@ var playState = function(game){
             //this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
-
+            
           this.background = new background(game);
           this.background.create();
 
@@ -42,16 +44,19 @@ var playState = function(game){
 
             // handle fruits
             this.fruits.update();
+            
+            game.global.collideFlag = false;
     this.physics.arcade.overlap(this.jolly.player,this.fruits.fruitsGroup,this.playerVsFruits,null,this);
             
             // handle score
             this.gameScore.update();
             
-        },
+        }, 
         
         playerVsFruits: function(player,fruit){
             fruit.kill();
             this.fruits.fruitSound.play();
+            game.global.collideFlag = true;
             game.global.score +=2;
             //var score = game.global.score;
             
