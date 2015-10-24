@@ -28,7 +28,7 @@ var playState = function(game){
           
             // scoring system
           this.gameScore = new Score(game); 
-          this.gameScore.create();    
+          this.gameScore.create();
 
         },
 
@@ -44,13 +44,17 @@ var playState = function(game){
             this.fruits.update();
     this.physics.arcade.overlap(this.jolly.player,this.fruits.fruitsGroup,this.playerVsFruits,null,this);
             
+            // handle score
             this.gameScore.update();
+            
         },
         
         playerVsFruits: function(player,fruit){
             fruit.kill();
             this.fruits.fruitSound.play();
             game.global.score +=2;
+            //var score = game.global.score;
+            
             //console.log('score: '+game.global.score);
         },
         
