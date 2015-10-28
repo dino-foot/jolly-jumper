@@ -6,7 +6,13 @@ var fruits = function(game){
     fruits.prototype = {
 
         create: function(){
-
+            
+            this.coconut = game.add.sprite(game.world.centerX,game.height-250,'coconut');
+            this.coconut.anchor.setTo(0.5,0.5);
+            this.coconut.visible = false;
+            this.coconutGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
+            this.coconutGroup.createMultiple('4','coconut',null,false);
+            
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
 

@@ -10,7 +10,7 @@ var loadState = function(game){
           // load all objcet 
           this.load.image('background','assets/bg.png');
           this.load.image('cactus','assets/cactus.png');
-          
+          this.load.image('coconut','assets/coconut.png');
           this.load.image('platform','assets/platform.png');
           
           //load fruties
