@@ -1,4 +1,5 @@
-
+window.onload = function(){
+    
     game = new Phaser.Game(350,550,Phaser.CANVAS,'gameContainer');
     //game = new Phaser.Game(window.innerWidth,window.innerHeight,Phaser.CANVAS,'gameContainer');
 				
@@ -24,3 +25,5 @@
 
         //Start the first state
     game.state.start("boot",true,false);
+    
+}
