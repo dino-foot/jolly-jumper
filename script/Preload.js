@@ -6,12 +6,17 @@ var loadState = function(game){
       
       preload: function(){
           console.log(game.state.getCurrentState());
+
+this.loadText = this.add.bitmapText(this.world.centerX,this.world.centerY-100,'font','loading ',30);
+          this.loadText.anchor.setTo(0.5,0.5);
           
           this.loadingBg = this.add.sprite(this.world.centerX,this.world.centerY,'loadingbg');
           this.loadingBg.anchor.setTo(0.5,0.5);
           this.loadingBar = this.add.sprite(this.world.centerX,this.world.centerY,'loadingbar');
           this.loadingBar.anchor.setTo(0.5,0.5);
           this.load.setPreloadSprite(this.loadingBar);
+          
+          
           
           // load all objcet 
           this.load.image('background','assets/bg.png');
@@ -47,6 +52,16 @@ var loadState = function(game){
       create: function(){
           
           this.state.start('Menu');
+      },
+      
+      loadUpdate: function(){
+        this.loadText.text = 'loading '+this.load.progress+'%';
+          //console.log(this.load.progress);
+      },
+      
+      update: function(){
+            
       }
+      
       
   }
