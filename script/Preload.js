@@ -7,6 +7,12 @@ var loadState = function(game){
       preload: function(){
           console.log(game.state.getCurrentState());
           
+          this.loadingBg = this.add.sprite(this.world.centerX,this.world.centerY,'loadingbg');
+          this.loadingBg.anchor.setTo(0.5,0.5);
+          this.loadingBar = this.add.sprite(this.world.centerX,this.world.centerY,'loadingbar');
+          this.loadingBar.anchor.setTo(0.5,0.5);
+          this.load.setPreloadSprite(this.loadingBar);
+          
           // load all objcet 
           this.load.image('background','assets/bg.png');
           this.load.image('cactus','assets/cactus.png');
@@ -28,7 +34,7 @@ var loadState = function(game){
            this.load.image('play','assets/GUI/play.png');    
            this.load.image('setting','assets/GUI/setting.png');    
            this.load.image('credit','assets/GUI/credit.png');    
-           this.load.image('howtoplay','assets/GUI/howToPlay.png');    
+           this.load.image('howtoplay','assets/GUI/howToPlay.png');      
            this.load.spritesheet('sound','assets/GUI/sound.png',70,60); 
            this.load.spritesheet('music','assets/GUI/music.png',70,85); 
           

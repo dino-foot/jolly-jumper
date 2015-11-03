@@ -48,10 +48,13 @@ var bootState = function(game){
         
         preload: function(){
            // loading bar goes here
-        
+           this.load.image('loadingbar','assets/GUI/loadingBar.png');          
+           this.load.image('loadingbg','assets/GUI/loadingBg.png');          
         },
         
         create: function(){
+            
+            
             this.state.start('Preload');
         }
         
