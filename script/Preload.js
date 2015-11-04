@@ -12,11 +12,13 @@ this.loadText = this.add.bitmapText(this.world.centerX,this.world.centerY-100,'f
           
           this.loadingBg = this.add.sprite(this.world.centerX,this.world.centerY,'loadingbg');
           this.loadingBg.anchor.setTo(0.5,0.5);
+          this.loadingBg.scale.setTo(0.5,0.5);
+          
           this.loadingBar = this.add.sprite(this.world.centerX,this.world.centerY,'loadingbar');
           this.loadingBar.anchor.setTo(0.5,0.5);
+          this.loadingBar.scale.setTo(0.5,1);
           this.load.setPreloadSprite(this.loadingBar);
-          
-          
+          this.loadingBar.x = this.world.centerX - this.loadingBar.width/2;
           
           // load all objcet 
           this.load.image('background','assets/bg.png');
