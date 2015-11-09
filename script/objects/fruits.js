@@ -1,18 +1,23 @@
 var fruits = function(game){
     this.fruitYMin = 99999;
+    this.coconutLoopTime = 2000; // 5 seconds
 };
-
+/*
+Note : when you're calling a function of an object like anchor (which is a Point), or animation , or Sound or whatever, the context is always that actual object.
+rich [9:56 PM]
+if it's a direct function on a Sprite then it can be null (as it will be set to the sprite automatically)
+*/
 
     fruits.prototype = {
 
         create: function(){
             
-            this.coconut = game.add.sprite(game.world.centerX,game.height-250,'coconut');
-            this.coconut.anchor.setTo(0.5,0.5);
-            this.coconut.visible = false;
             this.coconutGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
-            this.coconutGroup.createMultiple('4','coconut',null,false);
+            this.coconutGroup.createMultiple(4,'coconut',null,false);
             this.coconutGroup.callAll('body.setSize','body',35,35,7,10);
+            this.coconutGroup.callAll('anchor.setTo','anchor',0.5,0.5);
+            this.coconutGroup.callAll('body.gravity.set','body.gravity',0,400);
+            this.coconutGroup.callAll('body.bounce.set','body.bounce',0.5);
             
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
@@ -32,7 +37,7 @@ var fruits = function(game){
             this.fruitsGroup.createMultiple(1,'fruit3',null,false);
             this.fruitsGroup.createMultiple(1,'fruit4',null,false);
             
-            this.fruitsGroup.callAll('anchor.setTo',this,0.5,0.5);
+            this.fruitsGroup.callAll('anchor.setTo','anchor',0.5,0.5);
             this.fruitsGroup.setAll('body.immovable',true);
             this.fruitsGroup.callAll('body.setSize','body',25,25,0,2);
             
@@ -40,10 +45,23 @@ var fruits = function(game){
             
             Phaser.ArrayUtils.shuffle(this.fruitsGroup);
             this.fruitsGroup.updateZ();
+            
+            game.time.events.loop(this.coconutLoopTime,this.handleCoconut,this);
         },
         
         handleCoconut: function(){
-            
+            var coco = this.coconutGroup.getFirstDead();
+            if(coco){ 
+                var x = game.rnd.integerInRange(20,300);
+                var y = this.y;
+                coco.reset(x,y);
+                return;
+            }
+        },
+        killCoconuts: function(coco){
+            if(coco.y>game.height+game.camera.y){
+                coco.kill();
+            }
         },
         
         initialFruits: function(){
@@ -86,7 +104,7 @@ var fruits = function(game){
 
         update: function(){
              this.fruitsGroup.forEachAlive(this.handleFruits,this);
-
+             this.coconutGroup.forEachAlive(this.killCoconuts,this);        
         },
 
         render: function(){
