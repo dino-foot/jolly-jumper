@@ -1,6 +1,6 @@
-# Monkey Jumper !!
+# Jolly Jumper !!
 
-Temporary game testing Repository.
+Its a fun game.
 
 ## Play It
 
