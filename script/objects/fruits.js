@@ -1,6 +1,6 @@
 var fruits = function(game){
     this.fruitYMin = 99999;
-    this.coconutLoopTime = 2000;
+    this.coconutLoopTime = 10000;
 };
 
 /*
@@ -11,12 +11,13 @@ var fruits = function(game){
     fruits.prototype = {
 
         create: function(){
+            
              this.coconutGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
              this.coconutGroup.createMultiple(4,'coconut',null,false);
              this.coconutGroup.callAll('body.setSize','body',35,35,7,10);
              this.coconutGroup.callAll('anchor.setTo','anchor',0.5,0.5);
              this.coconutGroup.callAll('body.gravity.set','body.gravity',0,400);
-             this.coconutGroup.callAll('body.bounce.set','body.bounce',0.5);
+             this.coconutGroup.callAll('body.bounce.set','body.bounce',0.8);
             
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
@@ -51,8 +52,8 @@ var fruits = function(game){
         handleCoconut: function(){
             var coco = this.coconutGroup.getFirstDead();
             if(coco){ 
-                var x = game.rnd.integerInRange(20,300);
-                var y = this.y;
+                var x = game.rnd.integerInRange(10,310);
+                var y = this.y-200;
                 coco.reset(x,y);
                 return;
             }
