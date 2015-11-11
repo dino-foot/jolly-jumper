@@ -47,7 +47,7 @@ var loadState = function(game){
            this.load.image('howtoplay','assets/GUI/howToPlay.png');      
            this.load.spritesheet('sound','assets/GUI/sound.png',70,60); 
            this.load.spritesheet('music','assets/GUI/music.png',70,85); 
-          
+           this.load.spritesheet('life','assets/GUI/life-sprite.png',42,42);
           
           // sounds
           this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg'],true);
