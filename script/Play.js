@@ -4,6 +4,8 @@ var playState = function(game){
     this.background = null;
     this.hidden = null;
     this.platforms = null;
+    this.health = null;
+    this.healthFlag = 2;
 };
 
     playState.prototype = {
@@ -15,8 +17,8 @@ var playState = function(game){
             this.physics.startSystem(Phaser.Physics.ARCADE);
             
           this.background = new background(game);
-          this.background.create();
-
+          this.background.create(); 
+            
           this.platforms = new platform(game);
           this.platforms.create();
           this.platforms.initialPlatforms();
@@ -27,13 +29,15 @@ var playState = function(game){
           this.fruits = new fruits(game);
           this.fruits.create();
           this.fruits.initialFruits();
+                     
+          this.health = this.add.sprite(this.world.width-47,5,'life');
+          this.health.fixedToCamera = true;       
           
             // scoring system
           this.gameScore = new Score(game); 
           this.gameScore.create();
-
         },
-
+         
         update: function(){
             this.jolly.update();
             this.physics.arcade.collide(this.jolly.player,this.background.cactus,this.gameOver,null,this);
@@ -50,6 +54,7 @@ var playState = function(game){
             
             // handle score
             this.gameScore.update();
+                        this.physics.arcade.collide(this.jolly.player,this.fruits.coconutGroup,this.coconutVsPlayer,null,this);
             
         }, 
         
@@ -67,7 +72,15 @@ var playState = function(game){
             this.jolly.player.body.velocity.y -= this.rnd.integerInRange(500,650);
             
         },
-
+        
+        coconutVsPlayer: function(){
+            
+            var coco = this.fruits.coconutGroup.getFirstExists(true);
+            coco.body.velocity.x = this.rnd.integerInRange(100,300);
+           // coco.body.velocity.y = this.rnd.integerInRange(200,400);
+            this.health.frame = 1; 
+        },
+        
          gameOver: function(){
             this.world.setBounds(0,0,this.game.width,this.game.height);
             this.platforms.pltGroup.destroy(true,false);
