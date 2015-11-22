@@ -1,6 +1,6 @@
 var fruits = function(game){
     this.fruitYMin = 99999;
-    this.coconutLoopTime = 5000;
+    this.coconutLoopTime = 10000;
 };
 
 /*
@@ -18,8 +18,6 @@ var fruits = function(game){
              this.coconutGroup.callAll('anchor.setTo','anchor',0.5,0.5);
              this.coconutGroup.callAll('body.gravity.set','body.gravity',0,400);
              this.coconutGroup.callAll('body.bounce.set','body.bounce',0.8);
-             this.coconutGroup.setAll('body.checkCollision.left',false); 
-             this.coconutGroup.setAll('body.checkCollision.right',false); 
             
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
@@ -48,18 +46,16 @@ var fruits = function(game){
             Phaser.ArrayUtils.shuffle(this.fruitsGroup);
             this.fruitsGroup.updateZ();
             
-            game.time.events.loop(this.coconutLoopTime,this.handleCoconut,this);
+            game.time.events.loop(this.coconutLoopTime,this.handleCoconut,this)
         },
         
         handleCoconut: function(){
-            for(var i=0;i<2;i++){
             var coco = this.coconutGroup.getFirstDead();
             if(coco){ 
-                var x = game.rnd.integerInRange(60,300);
+                var x = game.rnd.integerInRange(10,310);
                 var y = this.y-200;
-                coco.reset(x,y+100);
+                coco.reset(x,y);
                 return;
-            }
             }
         },
     
