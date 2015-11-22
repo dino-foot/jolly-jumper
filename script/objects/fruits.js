@@ -1,6 +1,6 @@
 var fruits = function(game){
     this.fruitYMin = 99999;
-    this.coconutLoopTime = 5000; // 10s
+    this.coconutLoopTime = 7000; // 10s
 };
 
 /*
@@ -57,7 +57,7 @@ var fruits = function(game){
             if(coco){ 
                 var x = game.rnd.integerInRange(60,300);
                 var y = this.y; // bug can be raised here
-                coco.reset(x,y);
+                coco.reset(x,y+100);
                 return;
             }
         },
