@@ -119,7 +119,8 @@ var playState = function(game){
             this.jolly.player.kill();
             this.background.bg.kill();
             this.background.cactus.kill();
-
+            this.lifeptr = 0;
+            
             this.state.start('Menu');
         },
 
