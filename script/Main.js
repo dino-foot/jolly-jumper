@@ -4,7 +4,7 @@ window.onload = function(){
     //game = new Phaser.Game(window.innerWidth,window.innerHeight,Phaser.CANVAS,'gameContainer');
 				
 	//Add all states
-    game.state.add("boot", bootState);
+    game.state.add("Boot", bootState);
     game.state.add("Preload", loadState);
     game.state.add("Menu", menuState);
     game.state.add("Help", helpState);
@@ -16,7 +16,7 @@ window.onload = function(){
         score: 0,
         fruitSound: null,
         flag: false,
-        collideFlag: null,
+        collideFlag: false,
         menuBgSound: null,
         pltYMin: null
     }    
@@ -24,6 +24,6 @@ window.onload = function(){
 
 
         //Start the first state
-    game.state.start("boot",true,false);
+    game.state.start("Boot",true,false);
     
 }

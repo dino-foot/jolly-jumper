@@ -4,8 +4,11 @@ var playState = function(game){
     this.background = null;
     this.hidden = null;
     this.platforms = null;
-    this.health = null;
-    this.healthFlag = 2;
+    this.lifeGroup = null;
+    this.life1;
+    this.life2;
+    this.life3;
+    this.flag = 0;
 };
 
     playState.prototype = {
@@ -30,8 +33,16 @@ var playState = function(game){
           this.fruits.create();
           this.fruits.initialFruits();
                      
-          this.health = this.add.sprite(this.world.width-47,5,'life');
-          this.health.fixedToCamera = true;       
+          this.lifeGroup = this.add.group();
+          this.lifeGroup.fixedToCamera = true;       
+          
+         this.life1 = this.add.sprite(game.width-50,5,'life');
+         this.life2 = this.add.sprite(game.width-100,5,'life');
+         this.life3 = this.add.sprite(game.width-150,5,'life');
+            
+            this.lifeGroup.add(this.life1);
+            this.lifeGroup.add(this.life2);
+            this.lifeGroup.add(this.life3);     
           
             // scoring system
           this.gameScore = new Score(game); 
@@ -49,7 +60,7 @@ var playState = function(game){
             // handle fruits
             this.fruits.update();
             
-            game.global.collideFlag = false;
+            game.global.collideFlag = false; // // checking variable for score tweening.
     this.physics.arcade.overlap(this.jolly.player,this.fruits.fruitsGroup,this.playerVsFruits,null,this);
             
             // handle score
@@ -78,7 +89,12 @@ var playState = function(game){
             var coco = this.fruits.coconutGroup.getFirstExists(true);
             coco.body.velocity.x = this.rnd.integerInRange(100,300);
            // coco.body.velocity.y = this.rnd.integerInRange(200,400);
-            this.health.frame = 1; 
+            this.flag++;
+            if(this.flag>0 && this.flag<=3){
+                var life = this.lifeGroup.getFirstAlive();
+                life.kill();
+                return;
+            }
         },
         
          gameOver: function(){
