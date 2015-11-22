@@ -1,6 +1,6 @@
 var fruits = function(game){
     this.fruitYMin = 99999;
-    this.coconutLoopTime = 5000;
+    this.coconutLoopTime = 5000; // 10s
 };
 
 /*
@@ -16,10 +16,11 @@ var fruits = function(game){
              this.coconutGroup.createMultiple(4,'coconut',null,false);
              this.coconutGroup.callAll('body.setSize','body',35,35,7,10);
              this.coconutGroup.callAll('anchor.setTo','anchor',0.5,0.5);
-             this.coconutGroup.callAll('body.gravity.set','body.gravity',0,400);
-             this.coconutGroup.callAll('body.bounce.set','body.bounce',0.8);
+             this.coconutGroup.callAll('body.gravity.set','body.gravity',0,500);
+             this.coconutGroup.callAll('body.bounce.set','body.bounce',1);
              this.coconutGroup.setAll('body.checkCollision.left',false); 
              this.coconutGroup.setAll('body.checkCollision.right',false); 
+             this.coconutGroup.setAll('body.checkCollision.up',false); 
             
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
@@ -55,8 +56,8 @@ var fruits = function(game){
             var coco = this.coconutGroup.getFirstDead();
             if(coco){ 
                 var x = game.rnd.integerInRange(60,300);
-                var y = this.y-200;
-                coco.reset(x,y+100);
+                var y = this.y; // bug can be raised here
+                coco.reset(x,y);
                 return;
             }
         },
@@ -91,7 +92,7 @@ var fruits = function(game){
             this.min = game.camera.y;
             this.max = game.camera.y+game.height;
             this.y = game.rnd.integerInRange(this.min,this.min-300);
-            this.x = game.rnd.integerInRange(10,320);
+            this.x = game.rnd.integerInRange(30,320);
                        
             Phaser.ArrayUtils.shuffle(this.fruitsGroup);
             this.fruitsGroup.updateZ();

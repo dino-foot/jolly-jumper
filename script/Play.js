@@ -7,8 +7,8 @@ var playState = function(game){
     this.lifeGroup = null;
     this.life1;
     this.life2;
-    this.life3;
-    this.flag = 0;
+    this.life3; 
+    this.lifeptr = 0; // life sprite handler 
 };
 
     playState.prototype = {
@@ -62,10 +62,16 @@ var playState = function(game){
             
             game.global.collideFlag = false; // // checking variable for score tweening.
     this.physics.arcade.overlap(this.jolly.player,this.fruits.fruitsGroup,this.playerVsFruits,null,this);
-            
+            this.physics
             // handle score
             this.gameScore.update();
                         this.physics.arcade.collide(this.jolly.player,this.fruits.coconutGroup,this.coconutVsPlayer,null,this);
+            this.physics.arcade.collide(this.platforms.pltGroup,this.fruits.coconutGroup,this.coconutVsPlatforms_02,null,this);
+            
+            // game over if 3 life used
+            if(this.lifeptr>=3){
+                this.gameOver();
+            }
             
         }, 
         
@@ -80,21 +86,31 @@ var playState = function(game){
         },
         
         playerVsPlatform: function(){
-            this.jolly.player.body.velocity.y -= this.rnd.integerInRange(500,650);
+            this.jolly.player.body.velocity.y -= this.rnd.integerInRange(480,600);
             
+        },
+        
+        coconutVsPlatforms_01: function(coco){ // cool idea the coconut and platform both are moving 
+            coco.body.velocity.x = this.rnd.integerInRange(50,300);
+            coco.body.velocity.y = this.rnd.integerInRange(-200,-400);
+            
+        },
+        
+        coconutVsPlatforms_02: function(){
+            var coco = this.fruits.coconutGroup.getFirstExists(true);  
+            coco.body.velocity.x = this.rnd.integerInRange(-150,300);
+            coco.body.velocity.y = this.rnd.integerInRange(-200,-400);  
         },
         
         coconutVsPlayer: function(){
             
             var coco = this.fruits.coconutGroup.getFirstExists(true);
-            coco.body.velocity.x = this.rnd.integerInRange(100,300);
-           // coco.body.velocity.y = this.rnd.integerInRange(200,400);
-            this.flag++;
-            if(this.flag>0 && this.flag<=3){
+            coco.body.velocity.x = this.rnd.integerInRange(-50,250);
+            coco.body.velocity.y = this.rnd.integerInRange(-200,-400);
+            this.lifeptr++; 
                 var life = this.lifeGroup.getFirstAlive();
                 life.kill();
                 return;
-            }
         },
         
          gameOver: function(){
