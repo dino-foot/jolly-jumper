@@ -1,6 +1,10 @@
 var fruits = function(game){
     this.game = game;
     this.fruitYMin = 99999;
+    this.min = 0;
+    this.max = 0;
+    this.x = 0;
+    this.y = 0;
     this.gemsLoopTime = 10000; // 10s
     this.gemsGroup = null;
 };
@@ -13,6 +17,7 @@ var fruits = function(game){
     fruits.prototype = {
 
         create: function(){
+            this.fruitYMin = 99999;
             
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
@@ -49,9 +54,9 @@ var fruits = function(game){
             
             this.gemsGroup.callAll('anchor.setTo','anchor',0.5,0.5);
            // this.gemsGroup.callAll('body.velocity.set','body.velocity',100,100);
-            this.gemsGroup.callAll('body.setSize','body',30,40,2,2);
+            this.gemsGroup.callAll('body.setSize','body',38,40,5,2);
             this.gemsGroup.callAll('body.gravity.set','body.gravity',0,350);
-            this.gemsGroup.callAll('body.bounce.set','body.bounce',1);
+            this.gemsGroup.callAll('body.bounce.set','body.bounce',0.6);
             Phaser.ArrayUtils.shuffle(this.gemsGroup);
             this.gemsGroup.updateZ();
             
@@ -99,7 +104,7 @@ var fruits = function(game){
           for(var i=0;i<=7;i++){
                 var gem = this.gemsGroup.getFirstDead();
                 if(gem){
-                this.y = game.rnd.integerInRange(this.min,this.min-300);
+                this.y = game.rnd.integerInRange(this.min,this.min-500);
                 this.x = game.rnd.integerInRange(30,320);
                 gem.reset(this.x,this.y-20);
                // return;

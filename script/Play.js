@@ -94,9 +94,10 @@ var playState = function(game){
         },
         
         gemsVsPlatform: function(){
-            var gem = this.fruits.gemsGroup.getFirstExists(true);  
-            gem.body.velocity.x = this.rnd.integerInRange(-50,50);
-            gem.body.velocity.y = this.rnd.integerInRange(-50,50);
+            var gem = this.fruits.gemsGroup.getFirstExists(true);
+            gem.body.friction = 1;
+            gem.body.velocity.x = this.rnd.integerInRange(-20,20);
+          //  gem.body.velocity.y = 50;
         },
         
         gemsVsPlayer: function(player,gems){
@@ -114,7 +115,7 @@ var playState = function(game){
             this.background.bg.kill();
             this.background.cactus.kill();
             this.lifeptr = 0;
-
+                
             this.state.start('Menu');
         },
 

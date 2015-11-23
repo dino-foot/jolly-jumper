@@ -15,7 +15,7 @@ var platform = function(game){
            this.pltGroup.setAll('body.checkCollision.down',false); 
            this.pltGroup.setAll('body.checkCollision.left',false);
            this.pltGroup.setAll('body.checkCollision.right',false);
-           this.pltGroup.callAll('body.setSize','body',80,25,10,0);
+           this.pltGroup.callAll('body.setSize','body',85,25,10,0);
         },
             
         initialPlatforms: function(){
