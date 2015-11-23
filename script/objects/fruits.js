@@ -1,13 +1,10 @@
 var fruits = function(game){
     this.game = game;
     this.fruitYMin = 99999;
-<<<<<<< HEAD
     this.coconutLoopTime = 7000; // 7s
     this.gemsLoopTime = 10000; // 10s
     this.gemsGroup = null;
-=======
     this.coconutLoopTime = 7000; // 10s
->>>>>>> origin/gh-pages
 };
 
 /*
@@ -78,17 +75,15 @@ var fruits = function(game){
         handleCoconut: function(){
             var coco = this.coconutGroup.getFirstDead();
             if(coco){ 
-<<<<<<< HEAD
                 var x = game.rnd.integerInRange(40,300);
                 var y = this.y-50; // bug can be raised here
                 coco.reset(x,y);
                 //return;
-=======
+
                 var x = game.rnd.integerInRange(60,300);
                 var y = this.y; // bug can be raised here
                 coco.reset(x,y+100);
                 return;
->>>>>>> origin/gh-pages
             }
         },
     
