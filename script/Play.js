@@ -66,11 +66,8 @@ var playState = function(game){
             
             // handle score
            // this.gameScore.update();
-                        this.physics.arcade.collide(this.jolly.player,this.fruits.coconutGroup,this.coconutVsPlayer,null,this);
-            this.physics.arcade.collide(this.platforms.pltGroup,this.fruits.coconutGroup,this.coconutVsPlatforms_02,null,this);
-            
-            this.physics.arcade.collide(this.platforms.pltGroup,this.fruits.gemsGroup,this.gemsVsPlatform,null,this); // collide with gems
-            this.physics.arcade.collide(this.jolly.player,this.fruits.gemsGroup,this.gemsVsPlayer,null,this); // gems collide with player
+                       this.physics.arcade.collide(this.platforms.pltGroup,this.fruits.gemsGroup,this.gemsVsPlatform,null,this); // collide with gems
+            this.physics.arcade.overlap(this.jolly.player,this.fruits.gemsGroup,this.gemsVsPlayer,null,this); // gems collide with player
             
             // game over if 3 life used
             if(this.lifeptr==3){
@@ -98,8 +95,8 @@ var playState = function(game){
         
         gemsVsPlatform: function(){
             var gem = this.fruits.gemsGroup.getFirstExists(true);  
-            gem.body.velocity.x = this.rnd.integerInRange(-150,300);
-            gem.body.velocity.y = this.rnd.integerInRange(-200,-400);
+            gem.body.velocity.x = this.rnd.integerInRange(-50,50);
+            gem.body.velocity.y = this.rnd.integerInRange(-50,50);
         },
         
         gemsVsPlayer: function(player,gems){
@@ -109,30 +106,7 @@ var playState = function(game){
             game.global.collideFlag = true;
             this.gameScore.update();
         },
-        
-        coconutVsPlatforms_01: function(coco){ // cool idea the coconut and platform both are moving 
-            coco.body.velocity.x = this.rnd.integerInRange(50,300);
-            coco.body.velocity.y = this.rnd.integerInRange(-200,-400);
-            
-        },
-        
-        coconutVsPlatforms_02: function(){
-            var coco = this.fruits.coconutGroup.getFirstExists(true);  
-            coco.body.velocity.x = this.rnd.integerInRange(-150,300);
-            coco.body.velocity.y = this.rnd.integerInRange(-200,-400);  
-        },
-        
-        coconutVsPlayer: function(){
-            
-            var coco = this.fruits.coconutGroup.getFirstExists(true);
-            coco.body.velocity.x = this.rnd.integerInRange(-50,300);
-            coco.body.velocity.y = this.rnd.integerInRange(-100,-400);
-            this.lifeptr++; 
-                var life = this.lifeGroup.getFirstAlive();
-                life.kill();
-                return;
-        },
-        
+              
          gameOver: function(){
             this.world.setBounds(0,0,this.game.width,this.game.height);
             this.platforms.pltGroup.destroy(true,false);
