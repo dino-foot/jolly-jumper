@@ -37,8 +37,8 @@ var playState = function(game){
           this.lifeGroup.fixedToCamera = true;       
           
          this.life1 = this.add.sprite(game.width-50,5,'life');
-         this.life2 = this.add.sprite(game.width-100,5,'life');
-         this.life3 = this.add.sprite(game.width-150,5,'life');
+         this.life2 = this.add.sprite(game.width-90,5,'life');
+         this.life3 = this.add.sprite(game.width-130,5,'life');
             
             this.lifeGroup.add(this.life1);
             this.lifeGroup.add(this.life2);
@@ -47,6 +47,7 @@ var playState = function(game){
             // scoring system
           this.gameScore = new Score(game); 
           this.gameScore.create();
+
         },
          
         update: function(){
@@ -62,17 +63,21 @@ var playState = function(game){
             
             game.global.collideFlag = false; // // checking variable for score tweening.
     this.physics.arcade.overlap(this.jolly.player,this.fruits.fruitsGroup,this.playerVsFruits,null,this);
-            this.physics
+            
             // handle score
-            this.gameScore.update();
+           // this.gameScore.update();
                         this.physics.arcade.collide(this.jolly.player,this.fruits.coconutGroup,this.coconutVsPlayer,null,this);
             this.physics.arcade.collide(this.platforms.pltGroup,this.fruits.coconutGroup,this.coconutVsPlatforms_02,null,this);
             
+            this.physics.arcade.collide(this.platforms.pltGroup,this.fruits.gemsGroup,this.gemsVsPlatform,null,this); // collide with gems
+            this.physics.arcade.collide(this.jolly.player,this.fruits.gemsGroup,this.gemsVsPlayer,null,this); // gems collide with player
+            
             // game over if 3 life used
-            if(this.lifeptr>=3){
+            if(this.lifeptr==3){
                 this.gameOver();
             }
             
+           // this.gameScore.update();
         }, 
         
         playerVsFruits: function(player,fruit){
@@ -80,6 +85,7 @@ var playState = function(game){
             this.fruits.fruitSound.play();
             game.global.collideFlag = true;
             game.global.score +=2;
+            this.gameScore.update();
             //var score = game.global.score;
             
             //console.log('score: '+game.global.score);
@@ -88,6 +94,20 @@ var playState = function(game){
         playerVsPlatform: function(){
             this.jolly.player.body.velocity.y -= this.rnd.integerInRange(480,600);
             
+        },
+        
+        gemsVsPlatform: function(){
+            var gem = this.fruits.gemsGroup.getFirstExists(true);  
+            gem.body.velocity.x = this.rnd.integerInRange(-150,300);
+            gem.body.velocity.y = this.rnd.integerInRange(-200,-400);
+        },
+        
+        gemsVsPlayer: function(player,gems){
+            // a sound should play here
+            gems.kill();
+            game.global.score +=10;
+            game.global.collideFlag = true;
+            this.gameScore.update();
         },
         
         coconutVsPlatforms_01: function(coco){ // cool idea the coconut and platform both are moving 
@@ -105,8 +125,8 @@ var playState = function(game){
         coconutVsPlayer: function(){
             
             var coco = this.fruits.coconutGroup.getFirstExists(true);
-            coco.body.velocity.x = this.rnd.integerInRange(-50,250);
-            coco.body.velocity.y = this.rnd.integerInRange(-200,-400);
+            coco.body.velocity.x = this.rnd.integerInRange(-50,300);
+            coco.body.velocity.y = this.rnd.integerInRange(-100,-400);
             this.lifeptr++; 
                 var life = this.lifeGroup.getFirstAlive();
                 life.kill();
@@ -119,7 +139,8 @@ var playState = function(game){
             this.jolly.player.kill();
             this.background.bg.kill();
             this.background.cactus.kill();
-
+            this.lifeptr = 0;
+             
             this.state.start('Menu');
         },
 

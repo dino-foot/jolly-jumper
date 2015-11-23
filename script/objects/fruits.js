@@ -1,6 +1,9 @@
 var fruits = function(game){
+    this.game = game;
     this.fruitYMin = 99999;
-    this.coconutLoopTime = 5000; // 10s
+    this.coconutLoopTime = 7000; // 7s
+    this.gemsLoopTime = 10000; // 10s
+    this.gemsGroup = null;
 };
 
 /*
@@ -16,7 +19,7 @@ var fruits = function(game){
              this.coconutGroup.createMultiple(4,'coconut',null,false);
              this.coconutGroup.callAll('body.setSize','body',35,35,7,10);
              this.coconutGroup.callAll('anchor.setTo','anchor',0.5,0.5);
-             this.coconutGroup.callAll('body.gravity.set','body.gravity',0,500);
+             this.coconutGroup.callAll('body.gravity.set','body.gravity',20,550);
              this.coconutGroup.callAll('body.bounce.set','body.bounce',1);
              this.coconutGroup.setAll('body.checkCollision.left',false); 
              this.coconutGroup.setAll('body.checkCollision.right',false); 
@@ -49,16 +52,32 @@ var fruits = function(game){
             Phaser.ArrayUtils.shuffle(this.fruitsGroup);
             this.fruitsGroup.updateZ();
             
-            game.time.events.loop(this.coconutLoopTime,this.handleCoconut,this);
+            // gems handle
+            this.gemsGroup = this.game.add.physicsGroup(Phaser.Physics.ARCADE);
+            for(var i=0;i<=7;i++){
+                this.gemsGroup.create(this.game.width/2,this.game.height/2,'gems',i,false);
+            }
+            
+            this.gemsGroup.callAll('anchor.setTo','anchor',0.5,0.5);
+           // this.gemsGroup.callAll('body.velocity.set','body.velocity',100,100);
+            this.gemsGroup.callAll('body.setSize','body',40,40,6,2);
+            this.gemsGroup.callAll('body.gravity.set','body.gravity',0,400);
+            this.gemsGroup.callAll('body.bounce.set','body.bounce',0.6);
+            Phaser.ArrayUtils.shuffle(this.gemsGroup);
+            this.gemsGroup.updateZ();
+            
+            game.time.events.loop(this.coconutLoopTime,this.handleCoconut,this); // loop to infinity
+            game.time.events.loop(this.gemsLoopTime,this.handleGems,this); // loop to infinity
+            
         },
         
         handleCoconut: function(){
             var coco = this.coconutGroup.getFirstDead();
             if(coco){ 
-                var x = game.rnd.integerInRange(60,300);
-                var y = this.y; // bug can be raised here
+                var x = game.rnd.integerInRange(40,300);
+                var y = this.y-50; // bug can be raised here
                 coco.reset(x,y);
-                return;
+                //return;
             }
         },
     
@@ -100,15 +119,32 @@ var fruits = function(game){
             var tmp = this.fruitsGroup.getFirstDead();
             if(tmp){
                 tmp.reset(this.x,this.y-20);
-              //  elem.anchor.setTo(0.5,0.5);
-               // elem.reset(this.x+20,this.y);
             }
             return;
         },
-
+        
+        handleGems: function(){
+          for(var i=0;i<=7;i++){
+                var gem = this.gemsGroup.getFirstDead();
+                if(gem){
+                this.y = game.rnd.integerInRange(this.min,this.min-300);
+                this.x = game.rnd.integerInRange(30,320);
+                gem.reset(this.x,this.y);
+               // return;
+            }
+          }
+        },
+        
+        killGems: function(gem){
+            if(gem.y>game.height+game.camera.y){
+                gem.kill();
+            }
+        },
+        
         update: function(){
              this.fruitsGroup.forEachAlive(this.handleFruits,this);
-             this.coconutGroup.forEachAlive(this.killCoconuts,this);    
+             this.coconutGroup.forEachAlive(this.killCoconuts,this);
+             this.gemsGroup.forEachAlive(this.killGems,this);
         },
 
         render: function(){

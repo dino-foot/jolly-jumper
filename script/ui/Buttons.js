@@ -23,7 +23,7 @@ this.playbtn = game.add.button(game.world.centerX,game.world.centerY,'play',this
         
         handlePlay: function(){
             // run the play (core) state
-            game.global.menuBgSound.pause();
+            game.global.menuBgSound.stop();
             game.state.start('Play');
         },
         
