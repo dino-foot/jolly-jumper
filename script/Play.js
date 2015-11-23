@@ -140,7 +140,11 @@ var playState = function(game){
             this.background.bg.kill();
             this.background.cactus.kill();
             this.lifeptr = 0;
+<<<<<<< HEAD
              
+=======
+            
+>>>>>>> origin/gh-pages
             this.state.start('Menu');
         },
 
