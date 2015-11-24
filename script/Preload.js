@@ -47,6 +47,8 @@ var loadState = function(game){
            this.load.spritesheet('sound','assets/GUI/sound.png',70,60); 
            this.load.spritesheet('music','assets/GUI/music.png',70,85); 
             this.load.image('life','assets/GUI/life.png'); // Play.js
+            this.load.image('stone','assets/stone.png'); // fruit.js
+            this.load.image('coconut','assets/coconut.png'); // fruit.js
           
           // sounds
           this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg'],true);

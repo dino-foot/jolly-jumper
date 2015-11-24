@@ -1,6 +1,7 @@
 // Main game control script
 
 var playState = function(game){
+    this.game = game;
     this.background = null;
     this.hidden = null;
     this.platforms = null;
@@ -68,6 +69,7 @@ var playState = function(game){
            // this.gameScore.update();
                        this.physics.arcade.collide(this.platforms.pltGroup,this.fruits.gemsGroup,this.gemsVsPlatform,null,this); // collide with gems
             this.physics.arcade.overlap(this.jolly.player,this.fruits.gemsGroup,this.gemsVsPlayer,null,this); // gems collide with player
+            this.physics.arcade.collide(this.jolly.player,this.fruits.coconutGroup,this.coconutVsPlayer,null,this); // coconut collide with player
             
             // game over if 3 life used
             if(this.lifeptr==3){
@@ -103,11 +105,20 @@ var playState = function(game){
         gemsVsPlayer: function(player,gems){
             // a sound should play here
             gems.kill();
-            game.global.score +=10;
+            game.global.score +=5;
             game.global.collideFlag = true;
             this.gameScore.update();
         },
-              
+        
+        coconutVsPlayer: function(player,coconut){
+            var life = this.lifeGroup.getFirstExists(true);
+            if(life){
+                life.kill();
+            }
+            coconut.body.velocity.x = 400;
+            coconut.body.velocity.y = -300;
+        },
+        
          gameOver: function(){
             this.world.setBounds(0,0,this.game.width,this.game.height);
             this.platforms.pltGroup.destroy(true,false);
@@ -125,9 +136,7 @@ var playState = function(game){
               //this.background.render();
 
                // this.fruits.render();
-            //  this.game.debug.cameraInfo(this.camera,32,160,'#2d2d2d');
-             // this.fruits.render();    
-            //  this.game.debug.cameraInfo(this.camera,32,160,'#2d2d2d');   
+             // this.game.debug.cameraInfo(this.camera,32,100,'#2d2d2d');   
         }
 
     }
