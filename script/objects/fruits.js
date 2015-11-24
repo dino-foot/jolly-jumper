@@ -57,7 +57,7 @@ var fruits = function(game){
             this.gemsGroup.callAll('anchor.setTo','anchor',0.5,0.5);
            // this.gemsGroup.callAll('body.velocity.set','body.velocity',100,100);
             this.gemsGroup.callAll('body.setSize','body',38,40,5,2);
-            this.gemsGroup.callAll('body.gravity.set','body.gravity',0,350);
+            this.gemsGroup.callAll('body.gravity.set','body.gravity',0,300);
             this.gemsGroup.callAll('body.bounce.set','body.bounce',0.6);
             Phaser.ArrayUtils.shuffle(this.gemsGroup);
             this.gemsGroup.updateZ();
@@ -70,9 +70,11 @@ var fruits = function(game){
             this.coconutGroup.callAll('body.bounce.set','body.bounce',0.8);
             this.coconutGroup.setAll('body.friction','body',0.5);
             this.coconutGroup.setAll('body.mass','body',2);
+            this.coconutGroup.setAll('body.checkCollision.left',false);
+            this.coconutGroup.setAll('body.checkCollision.right',false);
+            this.coconutGroup.setAll('body.checkCollision.up',false);
             
             game.time.events.loop(this.gemsLoopTime,this.handleGems,this); // loop to infinity
-            
             game.time.events.loop(this.cocoLoopTime,this.handleCoconuts,this); // loop to infinity
             
         },
@@ -120,7 +122,7 @@ var fruits = function(game){
                 var gem = this.gemsGroup.getFirstDead();
                 if(gem){
                 //this.y = game.rnd.integerInRange(this.min,this.min-500);
-                var y = game.world.bounds.y+1500;    
+                var y = game.world.bounds.y+game.rnd.integerInRange(1500,2000);    
                 this.x = game.rnd.integerInRange(30,320);
                 gem.reset(this.x,y);
                // return;
@@ -129,13 +131,13 @@ var fruits = function(game){
         },
         
         handleCoconuts: function(){
-              var rand = game.rnd.integerInRange(1,4);
+              var rand = game.rnd.integerInRange(1,3);
            // console.log(rand);
           for(var i=0;i<=rand;i++){
                 var coco = this.coconutGroup.getFirstDead();
                 if(coco){
                 //this.y = game.rnd.integerInRange(this.min,this.min-600);
-                var y = game.world.bounds.y+1000;
+                var y = game.world.bounds.y+game.rnd.integerInRange(1500,2000);
                 this.x = game.rnd.integerInRange(30,320);
                 coco.reset(this.x,y);
                     //console.log('y '+this.y);
