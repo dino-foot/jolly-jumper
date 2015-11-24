@@ -63,7 +63,7 @@ var fruits = function(game){
             this.gemsGroup.updateZ();
             
             this.coconutGroup = this.game.add.physicsGroup(Phaser.Physics.ARCADE);
-            this.coconutGroup.createMultiple(4,'coconut',false);
+            this.coconutGroup.createMultiple(3,'coconut',false);
             this.coconutGroup.callAll('body.setSize','body',35,40,5,2);
             //this.coconutGroup.callAll('body.velocity.set','body.velocity',100,100);
             this.coconutGroup.callAll('body.gravity.set','body.gravity',0,300);
@@ -131,7 +131,7 @@ var fruits = function(game){
         },
         
         handleCoconuts: function(){
-              var rand = game.rnd.integerInRange(1,3);
+              var rand = game.rnd.integerInRange(0,2);
            // console.log(rand);
           for(var i=0;i<=rand;i++){
                 var coco = this.coconutGroup.getFirstDead();
