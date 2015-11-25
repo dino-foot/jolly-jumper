@@ -47,6 +47,7 @@ var loadState = function(game){
            this.load.spritesheet('sound-sprite','assets/GUI/sound-sprite.png',65,65); 
            this.load.spritesheet('music','assets/GUI/music.png',70,85); 
            this.load.image('title-bg','assets/GUI/title_bg.png');
+           this.load.image('menu-title','assets/GUI/menu-title.png');
             this.load.image('life','assets/GUI/life.png'); // Play.js
             this.load.image('stone','assets/stone.png'); // fruit.js
             this.load.image('coconut','assets/coconut.png'); // fruit.js

@@ -1,6 +1,7 @@
 var menuState = function(game){
     this.buttons = null;
     this.titleBg = null;
+    this.menuTitle = null;
 };
 
     menuState.prototype = {
@@ -17,6 +18,8 @@ var menuState = function(game){
             
             this.buttons = new menuButtons(game);
             this.buttons.create();
+            this.menuTitle = game.add.sprite(game.world.centerX,game.world.height-450,'menu-title');
+            this.menuTitle.anchor.setTo(0.5,0.5);
             
             this.tweenButton(this.buttons.playbtn); // make button juicy 
         },
