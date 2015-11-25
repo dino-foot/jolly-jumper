@@ -137,7 +137,7 @@ var fruits = function(game){
                 if(gem){
                 //this.y = game.rnd.integerInRange(this.min,this.min-500);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);    
-                this.x = game.rnd.integerInRange(30,320);
+                this.x = game.rnd.integerInRange(20,330);
                 gem.reset(this.x,y);
                // return;
             }
@@ -189,7 +189,7 @@ var fruits = function(game){
                 if(coco){
                 //this.y = game.rnd.integerInRange(this.min,this.min-600);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);
-                this.x = game.rnd.integerInRange(30,320);
+                this.x = game.rnd.integerInRange(30,310);
                 coco.reset(this.x,y);
                 this.flag = this.flag+1;
                 console.log('level 1');     
@@ -206,7 +206,7 @@ var fruits = function(game){
                 if(coco){
                 //this.y = game.rnd.integerInRange(this.min,this.min-600);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);
-                this.x = game.rnd.integerInRange(30,320);
+                this.x = game.rnd.integerInRange(30,310);
                 coco.reset(this.x,y);
                 this.flag = this.flag+1;
                 console.log('level 2');  
@@ -223,7 +223,7 @@ var fruits = function(game){
                 if(coco){
                 //this.y = game.rnd.integerInRange(this.min,this.min-600);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);
-                this.x = game.rnd.integerInRange(30,320);
+                this.x = game.rnd.integerInRange(30,310);
                 coco.reset(this.x,y);
                 this.flag = this.flag+1;
                 console.log('level 3');  

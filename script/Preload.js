@@ -44,11 +44,13 @@ var loadState = function(game){
            this.load.image('setting','assets/GUI/setting.png');    
            this.load.image('credit','assets/GUI/credit.png');    
            this.load.image('howtoplay','assets/GUI/howToPlay.png');      
-           this.load.spritesheet('sound','assets/GUI/sound.png',70,60); 
+           this.load.spritesheet('sound-sprite','assets/GUI/sound-sprite.png',65,65); 
            this.load.spritesheet('music','assets/GUI/music.png',70,85); 
+           this.load.image('title-bg','assets/GUI/title_bg.png');
             this.load.image('life','assets/GUI/life.png'); // Play.js
             this.load.image('stone','assets/stone.png'); // fruit.js
             this.load.image('coconut','assets/coconut.png'); // fruit.js
+            
           
           // sounds
           this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg'],true);
