@@ -5,30 +5,23 @@ var fruits = function(game){
     this.max = 0;
     this.x = 0;
     this.y = 0;
-    this.gemsLoopTime = 10000; // 10s
-    this.cocoLoopTime = 15000; // 15s
+    this.gemsLoopTime = 20000; // 20s
     this.gemsGroup = null;
     this.coconutGroup = null;
     this.levelRank = 'beginner'; // default value
     this.timer_01 = null;
     this.timer_02 = null;
     this.timer_03 = null;
-    this.time1 = 10000; // time beg
-    this.time2 = 10000; // time inter - 4min
-    this.time3 = 10000; // time expert - 6min
+    this.time1 = 15000; // time beg - 15s*6 = 1.30 min
+    this.time2 = 15000; // time inter - 15s*8 = 2 min
+    this.time3 = 25000; // time expert - 25s*infinty
     this.flag = 0;
 };
 
-/*
-+Note : when you're calling a function of an object like anchor (which is a Point), or animation , or Sound or whatever, the context is always that actual object.
-+rich [9:56 PM]
-+if it's a direct function on a Sprite then it can be null (as it will be set to the sprite automatically)
-+*/
     fruits.prototype = {
 
         create: function(){
-            this.fruitYMin = 99999;
-            
+     
             var fruitsArray = new Array('fruit0','fruit1','fruit2','fruit3','fruit4');
             this.fruitsGroup = game.add.physicsGroup(Phaser.Physics.ARCADE);
 
@@ -63,7 +56,6 @@ var fruits = function(game){
             }
             
             this.gemsGroup.callAll('anchor.setTo','anchor',0.5,0.5);
-           // this.gemsGroup.callAll('body.velocity.set','body.velocity',100,100);
             this.gemsGroup.callAll('body.setSize','body',38,40,5,2);
             this.gemsGroup.callAll('body.gravity.set','body.gravity',0,330);
             this.gemsGroup.callAll('body.bounce.set','body.bounce',0.6);
@@ -73,9 +65,8 @@ var fruits = function(game){
             this.coconutGroup = this.game.add.physicsGroup(Phaser.Physics.ARCADE);
             this.coconutGroup.createMultiple(4,'coconut',false);
             this.coconutGroup.callAll('body.setSize','body',35,40,5,2);
-            //this.coconutGroup.callAll('body.velocity.set','body.velocity',100,100);
-            this.coconutGroup.callAll('body.gravity.set','body.gravity',0,300);
-            this.coconutGroup.callAll('body.bounce.set','body.bounce',0.8);
+            this.coconutGroup.callAll('body.gravity.set','body.gravity',0,330);
+            this.coconutGroup.callAll('body.bounce.set','body.bounce',0.6);
             this.coconutGroup.setAll('body.friction','body',0.5);
             this.coconutGroup.setAll('body.mass','body',2);
             this.coconutGroup.setAll('body.checkCollision.left',false);
@@ -117,8 +108,7 @@ var fruits = function(game){
             this.min = game.camera.y;
             this.max = game.camera.y+game.height;
             this.y = game.rnd.integerInRange(this.min,this.min-300);
-            this.x = game.rnd.integerInRange(30,320);
-                       
+            this.x = game.rnd.integerInRange(20,320);                    
             Phaser.ArrayUtils.shuffle(this.fruitsGroup);
             this.fruitsGroup.updateZ();
             
@@ -131,15 +121,13 @@ var fruits = function(game){
         
         handleGems: function(){
            var rand = game.rnd.integerInRange(1,7);
-           // console.log(rand);
           for(var i=0;i<=rand;i++){
                 var gem = this.gemsGroup.getFirstDead();
                 if(gem){
                 //this.y = game.rnd.integerInRange(this.min,this.min-500);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);    
                 this.x = game.rnd.integerInRange(20,330);
-                gem.reset(this.x,y);
-               // return;
+                gem.reset(this.x+3,y);
             }
           }
         },
@@ -152,15 +140,12 @@ var fruits = function(game){
         
         handleCoconuts: function(){
             var rand = game.rnd.integerInRange(0,3);
-           // console.log(rand);
           for(var i=0;i<=rand;i++){
                 var coco = this.coconutGroup.getFirstDead();
                 if(coco){
-                //this.y = game.rnd.integerInRange(this.min,this.min-600);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);
                 this.x = game.rnd.integerInRange(30,320);
                 coco.reset(this.x,y);
-               // return;
             }
           }
         },
@@ -175,27 +160,21 @@ var fruits = function(game){
             this.timer_01.loop(this.time1,this.level_01,this);
             this.timer_02.loop(this.time2,this.level_02,this);
             this.timer_03.loop(this.time3,this.level_03,this);
-            console.log('timer set'); 
-            this.timer_01.start();
-            //this.timer_02.start();
-           // this.timer_03.start();
-            console.log('timer started'); 
+
+            this.timer_01.start(); // start level 01
+    
         },
         
         level_01: function(){
-            //console.log('level 1 o'); 
-            if(this.flag<=3){
+ 
                 var coco = this.coconutGroup.getFirstDead();
                 if(coco){
-                //this.y = game.rnd.integerInRange(this.min,this.min-600);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);
                 this.x = game.rnd.integerInRange(30,310);
                 coco.reset(this.x,y);
                 this.flag = this.flag+1;
                 console.log('level 1');     
-            }
-        }
-            
+            }          
         },
         
         level_02: function(){
@@ -204,7 +183,6 @@ var fruits = function(game){
               for(var i=0;i<=rand;i++){
                 var coco = this.coconutGroup.getFirstDead();
                 if(coco){
-                //this.y = game.rnd.integerInRange(this.min,this.min-600);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);
                 this.x = game.rnd.integerInRange(30,310);
                 coco.reset(this.x,y);
@@ -221,7 +199,6 @@ var fruits = function(game){
               for(var i=0;i<=rand;i++){
                 var coco = this.coconutGroup.getFirstDead();
                 if(coco){
-                //this.y = game.rnd.integerInRange(this.min,this.min-600);
                 var y = game.world.bounds.y+game.rnd.integerInRange(1500,1800);
                 this.x = game.rnd.integerInRange(30,310);
                 coco.reset(this.x,y);
@@ -234,14 +211,14 @@ var fruits = function(game){
         },
         
         handleDifficulty : function(flag){
-            if(flag == 3){
+            if(flag == 6){
                 this.timer_01.stop();
-               // console.log('timer 1 stopped');
-                //console.log('timer 2 started');
+                this.flag = 0;
                 this.timer_02.start();
             }
-            else if(flag >= 10){
+            else if(flag == 8){
                 this.timer_02.stop();
+                this.flag = 0;
                 this.timer_03.start();
             }
             
