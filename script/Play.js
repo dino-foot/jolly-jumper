@@ -20,6 +20,8 @@ var playState = function(game){
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
             game.global.jumpSound = this.game.add.audio('jumpSound',1,false);
+            game.global.gemSound = this.game.add.audio('gemSound',1,false);
+            game.global.deadSound = this.game.add.audio('deadSound',1,false);
             
           this.background = new background(game);
           this.background.create(); 
@@ -54,7 +56,7 @@ var playState = function(game){
          
         update: function(){
             this.jolly.update();
-            this.physics.arcade.collide(this.jolly.player,this.background.cactus,this.gameOver,null,this);
+            this.physics.arcade.collide(this.jolly.player,this.background.cactus,this.playerDead,null,this);
             this.physics.arcade.collide(this.jolly.player,this.platforms.pltGroup,this.playerVsPlatform,null,this);
             this.jolly.handleMovement();
 
@@ -106,6 +108,7 @@ var playState = function(game){
         
         gemsVsPlayer: function(player,gems){
             // a sound should play here
+            game.global.gemSound.play();
             gems.kill();
             game.global.score +=5;
             game.global.collideFlag = true;
@@ -124,14 +127,24 @@ var playState = function(game){
          gameOver: function(){
             this.world.setBounds(0,0,this.game.width,this.game.height);
             this.platforms.pltGroup.destroy(true,false);
-            this.jolly.player.kill();
             this.background.bg.kill();
             this.background.cactus.kill();
             this.lifeptr = 0;
-                
+            
             this.state.start('Menu');
         },
-
+        
+        playerDead: function(){
+            this.jolly.player.kill();
+            game.global.deadSound.play();
+            
+            game.global.deadSound.onStop.add(function(){
+               console.log('sound completed');
+                this.gameOver();
+                // take player name input & show highscore along with player score
+            },this);
+        },
+        
         render: function(){
               //this.jolly.render();
               //this.platforms.render();
