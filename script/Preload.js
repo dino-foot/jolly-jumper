@@ -1,5 +1,5 @@
 var loadState = function(game){
-    
+
 };
 
   loadState.prototype = {
@@ -54,17 +54,28 @@ var loadState = function(game){
             
           
           // sounds
-this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg','sounds/fruitGulp.wav'],true);
-          this.load.audio('menuBg',['sounds/menuBg.mp3','sounds/menuBgs.ogg'],true);
+          this.load.audio('fruitGulp',['sounds/fruitGulp.wav','sounds/fruitGulp.ogg','sounds/fruitGulp.mp3','sounds/fruitGulp.m4a'],true);
+          this.load.audio('menuBg',['sounds/menuBg.ogg','sounds/menuBg.wav','sounds/menuBg.mp3','sounds/menuBg.m4a'],true);
           
-          this.load.audio('jumpSound',['sounds/jump.mp3','sounds/jump.ogg','sounds/jump.wav'],false);
+          this.load.audio('jumpSound',['sounds/jump.wav','sounds/jump.ogg','sounds/jump.mp3','sounds/jump.m4a'],true);
+
+          this.load.audio('gemSound',['sounds/gemSound.mp3','sounds/gemSound.wav','sounds/gemSound.ogg','sounds/gemSound.m4a'],true);
+          
+          this.load.audio('deadSound',['sounds/dead.mp3','sounds/dead.wav','sounds/dead.ogg','sounds/dead.m4a'],true);
+          
+          
       },
       
       create: function(){
           
-          //if(this.game.cache.isSoundReady('menuBg')){
-			this.state.start('Menu');
-		  //}
+          console.log(this.cache.isSoundDecoded('fruitGulp'));
+          console.log(this.cache.isSoundDecoded('menuBg'));
+          console.log(this.cache.isSoundDecoded('jumpSound'));
+          
+          this.sound.setDecodedCallback([ 'gemSound', 'menuBg', 'jumpSound','deadSound' ], function(){
+                console.log('sounds are ready');
+                this.state.start('Menu');
+          }, this);
       },
       
       loadUpdate: function(){
