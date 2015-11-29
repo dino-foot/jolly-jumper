@@ -54,8 +54,10 @@ var loadState = function(game){
             
           
           // sounds
-          this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg'],true);
+this.load.audio('fruitGulp',['sounds/fruitGulp.mp3','sounds/fruitGulp.ogg','sounds/fruitGulp.wav'],true);
           this.load.audio('menuBg',['sounds/menuBg.mp3','sounds/menuBgs.ogg'],true);
+          
+          this.load.audio('jumpSound',['sounds/jump.mp3','sounds/jump.ogg','sounds/jump.wav'],false);
       },
       
       create: function(){

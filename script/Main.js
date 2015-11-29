@@ -18,6 +18,7 @@ window.onload = function(){
         flag: false,
         collideFlag: false,
         menuBgSound: null,
+        jumpSound: null,
         pltYMin: null
     }    
 

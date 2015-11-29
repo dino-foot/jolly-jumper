@@ -19,6 +19,7 @@ var playState = function(game){
             //this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
+            game.global.jumpSound = this.game.add.audio('jumpSound',1,false);
             
           this.background = new background(game);
           this.background.create(); 
@@ -91,6 +92,7 @@ var playState = function(game){
         },
         
         playerVsPlatform: function(){
+            game.global.jumpSound.play();
             this.jolly.player.body.velocity.y -= this.rnd.integerInRange(480,600);
             
         },
