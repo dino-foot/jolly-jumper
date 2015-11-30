@@ -11,7 +11,7 @@ var bootState = function(game){
             console.log(game.state.getCurrentState());
                 
             if (this.game.device.desktop){
-                
+            
                 this.scale.pageAlignHorizontally = true;
                 this.scale.pageAlignVertically = true;
                 this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

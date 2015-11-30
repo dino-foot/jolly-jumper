@@ -92,7 +92,11 @@ var playState = function(game){
         
         playerVsFruits: function(player,fruit){
             fruit.kill();
-            this.fruits.fruitSound.play();
+            if(game.global.soundPlay)
+                this.fruits.fruitSound.play();
+            else
+                this.fruits.fruitSound.stop();
+                
             game.global.collideFlag = true;
             game.global.score +=2;
             this.gameScore.update();
@@ -102,7 +106,11 @@ var playState = function(game){
         },
         
         playerVsPlatform: function(){
-            game.global.jumpSound.play();
+            if(game.global.soundPlay)
+                game.global.jumpSound.play();
+            else
+                game.global.jumpSound.stop();
+            
             this.jolly.player.body.velocity.y -= this.rnd.integerInRange(480,600);
             
         },
@@ -115,8 +123,11 @@ var playState = function(game){
         },
         
         gemsVsPlayer: function(player,gems){
-            // a sound should play here
-            game.global.gemSound.play();
+            if(game.global.soundPlay)
+                game.global.gemSound.play();
+            else
+                game.global.gemSound.stop();
+            
             gems.kill();
             game.global.score +=5;
             game.global.collideFlag = true;
@@ -144,13 +155,25 @@ var playState = function(game){
         
         playerDead: function(){
             this.jolly.player.kill();
-            game.global.deadSound.play();
-            
-            game.global.deadSound.onStop.add(function(){
-               console.log('sound completed');
-                this.gameOver();
+            var flag = true;
+            if(game.global.soundPlay){
+                game.global.deadSound.play();
+                flag = true;
+            }
+            else{
+                game.global.deadSound.stop();
+                flag = false;
+            }
+            if(flag == true){
+                game.global.deadSound.onStop.add(function(){
+                    console.log('sound completed');
+                    this.gameOver();
                 // take player name input & show highscore along with player score
-            },this);
+                },this);
+            }
+            else{
+                this.gameOver();
+            }
         },
         
         handlePause: function(){
