@@ -6,7 +6,7 @@ Its a fun game.
 
 http://shohan4556.github.io/jolly-jumper/
 
-Mozilla-firefox recommanded.
+Supported Browser **Mozilla-firefox**, **Chrome** , **Opera**.
 
 ## Contributing
 
