@@ -44,15 +44,16 @@ var loadState = function(game){
            this.load.image('setting','assets/GUI/setting.png');    
            this.load.image('credit','assets/GUI/credit.png');    
            this.load.image('howtoplay','assets/GUI/howToPlay.png');      
-           this.load.spritesheet('sound-sprite','assets/GUI/sound-sprite.png',65,65); 
-           this.load.spritesheet('music','assets/GUI/music.png',70,85); 
+           this.load.spritesheet('sound-sprite','assets/GUI/sound.png',70,60); 
+           this.load.spritesheet('music-sprite','assets/GUI/music.png',70,85); 
            this.load.image('title-bg','assets/GUI/title_bg.png');
            this.load.image('menu-title','assets/GUI/menu-title.png');
-            this.load.image('life','assets/GUI/life.png'); // Play.js
-            this.load.image('stone','assets/stone.png'); // fruit.js
-            this.load.image('coconut','assets/coconut.png'); // fruit.js
-            
-          
+           this.load.image('pauseBtn','assets/GUI/pause.png');  // Play.js
+           this.load.image('resumeBtn','assets/GUI/resume.png'); // Play.js
+           this.load.image('life','assets/GUI/life.png'); // Play.js
+           this.load.image('stone','assets/stone.png'); // fruit.js
+           this.load.image('coconut','assets/coconut.png'); // fruit.js
+           
           // sounds
           this.load.audio('fruitGulp',['sounds/fruitGulp.wav','sounds/fruitGulp.ogg','sounds/fruitGulp.mp3','sounds/fruitGulp.m4a'],true);
           this.load.audio('menuBg',['sounds/menuBg.ogg','sounds/menuBg.wav','sounds/menuBg.mp3','sounds/menuBg.m4a'],true);
@@ -67,11 +68,7 @@ var loadState = function(game){
       },
       
       create: function(){
-          
-          console.log(this.cache.isSoundDecoded('fruitGulp'));
-          console.log(this.cache.isSoundDecoded('menuBg'));
-          console.log(this.cache.isSoundDecoded('jumpSound'));
-          
+            
           this.sound.setDecodedCallback([ 'gemSound', 'menuBg', 'jumpSound','deadSound' ], function(){
                 console.log('sounds are ready');
                 this.state.start('Menu');

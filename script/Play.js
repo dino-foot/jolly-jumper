@@ -2,8 +2,9 @@
 
 var playState = function(game){
     this.game = game;
-    this.background = null;
-    this.hidden = null;
+    this.background = null; // image
+    this.pauseButton = false;
+    this.resumeButton = null;
     this.platforms = null;
     this.lifeGroup = null;
     this.life1;
@@ -19,6 +20,7 @@ var playState = function(game){
             //this.game.add.plugin(Phaser.Plugin.Debug); // debug plugin
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
+            
             game.global.jumpSound = this.game.add.audio('jumpSound',1,false);
             game.global.gemSound = this.game.add.audio('gemSound',1,false);
             game.global.deadSound = this.game.add.audio('deadSound',1,false);
@@ -51,7 +53,13 @@ var playState = function(game){
             // scoring system
           this.gameScore = new Score(game); 
           this.gameScore.create();
-
+           
+            // pause button 
+            this.pauseButton = this.game.add.button(25,25,'pauseBtn',this.handlePause,this);
+            this.pauseButton.anchor.setTo(0.5,0.5);
+            this.pauseButton.scale.setTo(0.4,0.4);
+            this.pauseButton.fixedToCamera = true;
+            
         },
          
         update: function(){
@@ -143,6 +151,15 @@ var playState = function(game){
                 this.gameOver();
                 // take player name input & show highscore along with player score
             },this);
+        },
+        
+        handlePause: function(){
+            this.physics.arcade.isPaused = (this.physics.arcade.isPaused) ? false: true;
+             // this.physics.arcade.isPaused = true;          
+        },
+        
+        handleResume: function(){
+            
         },
         
         render: function(){
