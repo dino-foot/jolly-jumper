@@ -3,6 +3,7 @@ var leaderboardState = function(game){
     this.retriveData = 'Player';
     this.restartBtn;
     this.menuBtn;
+    this.Name = null;
     
     this.style = { font: "bold 28px Arial", fill: "#fff", tabs: [ 100, 300 ] };
     this.textStyle = { font: "22px Comic Sans MS",stroke: '#ffffff', strokeThickness: 4, fill: "#BE5446", tabs: [ 100, 300 ] };
@@ -19,13 +20,15 @@ leaderboardState.prototype = {
         this.game.stage.backgroundColor = '#373F6C';
         
         this.buildInterface();
-        var playerName1 = prompt('Tell Us Your Name ','nick name');
+       // this.Name = prompt('Tell Us Your Name ','nick name');
         
-        var player1 = {
-            name: playerName1,
-            score: game.global.score
-        }
-        localStorage.setItem('player1',JSON.stringify(player1));
+        this.player = {
+        name:this.Name,
+        score: game.global.score  
+        };
+        
+        
+      //  localStorage.setItem('player',JSON.stringify(this.player));
         this.showScore();
         
     },
@@ -86,20 +89,50 @@ this.game.state.start('Menu');
         this.menuBtn.input.useHandCursor = true;
         
     },
-    
-      // handle player current score 
+     
         showScore: function(){
+        var playerName;
+        var playerScore;
+        var retriveDate;
+        var player1;
+           
+            if(localStorage.getItem('player')===null){
+                this.Name = prompt('Tell Us Your Name ','nick name');
+                this.player = {
+                name: this.Name,
+                score: game.global.score
+                }
+                localStorage.setItem('player',JSON.stringify(this.player));
+                
+            }else{
+                retriveDate = localStorage.getItem('player');
+                player1 = JSON.parse(retriveDate); 
+                console.log(player1);
+          
+                if(game.global.score>player1.score){
+                    this.Name = prompt('Tell us Your Name ','nick name');
+                    this.player = {
+                    name: this.Name,
+                    score: game.global.score
+                    }
+                    localStorage.setItem('player',JSON.stringify(this.player));
+                    
+                    playerName = this.add.text(70,180,this.Name,this.textStyle);
+                    playerName.anchor.setTo(0.5,0.5);
+                    playerScore = this.add.text(255,180,game.global.score,this.textStyle);
+                    playerScore.anchor.setTo(0.5,0.5);
+                    console.log('highscore');
+                    return;
+                }
+                
+                playerName = this.add.text(70,180,player1.name,this.textStyle);
+                playerName.anchor.setTo(0.5,0.5);
+                playerScore = this.add.text(255,180,player1.score,this.textStyle);
+                playerScore.anchor.setTo(0.5,0.5); 
+            }
             
-        var retriveDate = localStorage.getItem('player1');
-        var player1 = JSON.parse(retriveDate);
-        //console.log(data.name);
-        
-          var playerName = this.add.text(70,180,player1.name,this.textStyle);
-          playerName.anchor.setTo(0.5,0.5);
-          var playerScore = this.add.text(255,180,player1.score,this.textStyle);
-          playerScore.anchor.setTo(0.5,0.5);    
             
-        }
+        } // end showScore
     
     
 }
