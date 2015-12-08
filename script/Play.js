@@ -152,12 +152,14 @@ var playState = function(game){
             this.fruits.coconutGroup.destroy();
             this.fruits.fruitsGroup.destroy();
             this.fruits.gemsGroup.destroy();
+            this.gameScore.scoreLabel.kill();
+            this.pauseButton.kill();
             this.lifeptr = 0;
         },
         
          gameOver: function(){
-            //this.killAll(); 
-            this.state.start('Menu');
+            this.killAll(); 
+            this.state.start('LeaderBoard');
         },
         
         playerDead: function(){
@@ -172,16 +174,12 @@ var playState = function(game){
                 flag = false;
             }
             if(flag == true){
-                game.global.deadSound.onStop.add(function(){
-                    
-                // take player name input & show highscore along with player score
-                    bootbox.prompt('Whats your Name',this.currentScore);  
+                game.global.deadSound.onStop.add(function(){ 
                     this.killAll();
                     game.state.start('LeaderBoard');
                 },this);
             }
             else{
-                bootbox.prompt('Tell us your Name',this.currentScore);
                 this.killAll();
                 game.state.start('LeaderBoard');
             }
@@ -191,12 +189,9 @@ var playState = function(game){
         currentScore: function(name,score){
             score = game.global.score;
             var currentPlayer = {
-              'PlyaerName': name,
+              'PlayerName': name,
               'PlayerScore': score    
             };
-            localStorage.setItem('currentPlayer',JSON.stringify(currentPlayer));
-            var retriveData = localStorage.getItem('currentPlayer');
-            console.log('retriveData :',JSON.parse(retriveData)); // show score with name 
         },
         
         handlePause: function(){

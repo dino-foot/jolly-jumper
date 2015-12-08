@@ -47,10 +47,7 @@ var bootState = function(game){
         },
         
         preload: function(){
-           // loading bar goes here
-           this.load.image('loadingbar','assets/GUI/loadingBar.png');          
-           this.load.image('loadingbg','assets/GUI/loadingBg.png');          
-           this.load.bitmapFont('font','assets/font/font.png','assets/font/font.fnt');           
+           // loading bar goes here          
         },
         
         create: function(){

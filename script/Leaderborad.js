@@ -1,5 +1,14 @@
 var leaderboardState = function(game){
     this.game = game;
+    this.retriveData = 'Player';
+    this.restartBtn;
+    this.menuBtn;
+    
+    this.style = { font: "bold 28px Arial", fill: "#fff", tabs: [ 100, 300 ] };
+    this.textStyle = { font: "22px Comic Sans MS",stroke: '#ffffff', strokeThickness: 4, fill: "#BE5446", tabs: [ 100, 300 ] };
+    this.styleTextH = { font: "bold 58px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    this.styleTextH2 = { font: "bold 36px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    
 };
 
 
@@ -10,10 +19,19 @@ leaderboardState.prototype = {
         this.game.stage.backgroundColor = '#373F6C';
         
         this.buildInterface();
+        var playerName1 = prompt('Tell Us Your Name ','nick name');
+        
+        var player1 = {
+            name: playerName1,
+            score: game.global.score
+        }
+        localStorage.setItem('player1',JSON.stringify(player1));
+        this.showScore();
+        
     },
     
     buildInterface: function(){
-    
+        
 	//User Inteface
 		var bar = this.add.graphics();
 	    bar.beginFill(0xfae013);
@@ -31,42 +49,57 @@ leaderboardState.prototype = {
 
 		var barBottom = this.add.graphics();
 	    barBottom.beginFill(0x6ac8ed, 1);
-	    barBottom.drawRect(0, this.game.height - 60, this.game.width, 60);
+	    barBottom.drawRect(0, this.game.height - 100, this.game.width, 95);
 	    barBottom.endFill();        
 
 	    barBottom = this.add.graphics();
 	    barBottom.beginFill(0x49B8E7, 1);
-	    barBottom.drawRect(0, this.game.height - 50, this.game.width, 50);
+	    barBottom.drawRect(0, this.game.height - 90, this.game.width, 90);
 	    barBottom.endFill();    
 
 	    barBottom = this.add.graphics();
-	    barBottom.beginFill(0xfae013, 1);
-	    barBottom.drawRect(0, this.game.height - 40, this.game.width, 40);
+	    barBottom.beginFill(0xD3F939, 1);
+	    barBottom.drawRect(0, this.game.height - 80, this.game.width, 80);
 	    barBottom.endFill();
 
-	 //   scoreText = this.add.text(5, 5, 'Ranking TOP 10', styleTextH); 
-	//	scoreText.setShadow(2, 2, 'rgba(0,0,0,0.5)', 2);
-
-	//	easyText = this.add.text(15, 100, 'Ranking łatwy: ', styleTextH2);
-	//	normalText = this.add.text(15, 415, 'Ranking normalny: ', styleTextH2);
-	//	hardText = this.add.text(525, 100, 'Ranking trudny: ', styleTextH2);
-	//	vhardText = this.add.text(525, 415, 'Ranking bardzo trudny: ', styleTextH2);		
-
-			 //   var headings = ['Miejsce', 'Gracz', 'Punkty', 'Czas'];
-
-			//    text = this.add.text(32, 150, '', style);
-			//    text.parseList(headings);
-
-			//    text = this.add.text(32, 460, '', style);
-			//    text.parseList(headings);
-
-			//    text = this.add.text(550, 150, '', style);
-			//    text.parseList(headings);		
-
-			//    text = this.add.text(550, 460, '', style);
-			//    text.parseList(headings);			
-
-    }
+	    scoreText = this.add.text(5, 5, 'Score',this.styleTextH); 
+		scoreText.setShadow(2, 2, 'rgba(0,0,0,0.5)', 2);		
+        
+			  var Name = this.add.text(80,140,'Name',this.style);
+              Name.anchor.setTo(0.5,0.5);
+			  var Score = this.add.text(250,140,'Score',this.style);
+              Score.anchor.setTo(0.5,0.5);
+        
+                   
+this.restartBtn = game.add.button(60,game.height-40,'restartBtn',function(){
+this.game.state.start('Play');
+},this);
+        this.restartBtn.anchor.setTo(0.5,0.5);
+        this.restartBtn.scale.setTo(0.5,0.5);
+        this.restartBtn.input.useHandCursor = true;
+        
+        this.menuBtn = game.add.button(300,game.height-40,'menuBtn',function(){
+this.game.state.start('Menu');
+},this);
+        this.menuBtn.anchor.setTo(0.5,0.5);
+        this.menuBtn.scale.setTo(0.8,0.8);
+        this.menuBtn.input.useHandCursor = true;
+        
+    },
+    
+      // handle player current score 
+        showScore: function(){
+            
+        var retriveDate = localStorage.getItem('player1');
+        var player1 = JSON.parse(retriveDate);
+        //console.log(data.name);
+        
+          var playerName = this.add.text(70,180,player1.name,this.textStyle);
+          playerName.anchor.setTo(0.5,0.5);
+          var playerScore = this.add.text(255,180,player1.score,this.textStyle);
+          playerScore.anchor.setTo(0.5,0.5);    
+            
+        }
     
     
 }
