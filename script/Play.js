@@ -143,13 +143,20 @@ var playState = function(game){
             coconut.body.velocity.y = -300;
         },
         
-         gameOver: function(){
+        killAll: function(){
             this.world.setBounds(0,0,this.game.width,this.game.height);
             this.platforms.pltGroup.destroy(true,false);
             this.background.bg.kill();
             this.background.cactus.kill();
+            this.lifeGroup.destroy();
+            this.fruits.coconutGroup.destroy();
+            this.fruits.fruitsGroup.destroy();
+            this.fruits.gemsGroup.destroy();
             this.lifeptr = 0;
-            
+        },
+        
+         gameOver: function(){
+            //this.killAll(); 
             this.state.start('Menu');
         },
         
@@ -166,14 +173,30 @@ var playState = function(game){
             }
             if(flag == true){
                 game.global.deadSound.onStop.add(function(){
-                    console.log('sound completed');
-                    this.gameOver();
+                    
                 // take player name input & show highscore along with player score
+                    bootbox.prompt('Whats your Name',this.currentScore);  
+                    this.killAll();
+                    game.state.start('LeaderBoard');
                 },this);
             }
             else{
-                this.gameOver();
+                bootbox.prompt('Tell us your Name',this.currentScore);
+                this.killAll();
+                game.state.start('LeaderBoard');
             }
+        },
+        
+        // handle player current score 
+        currentScore: function(name,score){
+            score = game.global.score;
+            var currentPlayer = {
+              'PlyaerName': name,
+              'PlayerScore': score    
+            };
+            localStorage.setItem('currentPlayer',JSON.stringify(currentPlayer));
+            var retriveData = localStorage.getItem('currentPlayer');
+            console.log('retriveData :',JSON.parse(retriveData)); // show score with name 
         },
         
         handlePause: function(){

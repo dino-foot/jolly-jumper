@@ -10,7 +10,8 @@ window.onload = function(){
     game.state.add("Help", helpState);
     game.state.add("Credit", creditState);
     game.state.add("Play", playState);
-   
+    game.state.add("LeaderBoard",leaderboardState);
+    
     //define global var
     game.global = {
         score: 0,
