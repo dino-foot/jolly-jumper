@@ -21,6 +21,7 @@ var playState = function(game){
             
             this.physics.startSystem(Phaser.Physics.ARCADE);
             
+            game.global.menuBgSound.stop();
             game.global.jumpSound = this.game.add.audio('jumpSound',1,false);
             game.global.gemSound = this.game.add.audio('gemSound',1,false);
             game.global.deadSound = this.game.add.audio('deadSound',1,false);
@@ -139,6 +140,8 @@ var playState = function(game){
             game.global.cocoSound.play();
             var life = this.lifeGroup.getFirstExists(true);
             if(life){
+                this.lifeptr++;
+                console.log(this.lifeptr);
                 life.kill();
             }
             coconut.body.velocity.x = 400;

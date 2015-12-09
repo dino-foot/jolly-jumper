@@ -8,6 +8,7 @@ var creditState = function(game){
             console.log(game.state.getCurrentState());
             this.stage.backgroundColor = '#F1FF87';
             this.buildInterface();
+            game.global.menuBgSound.stop();
             
             this.about();
         },

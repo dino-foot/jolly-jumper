@@ -12,8 +12,8 @@ var fruits = function(game){
     this.timer_01 = null;
     this.timer_02 = null;
     this.timer_03 = null;
-    this.time1 = 15000; // time beg - 15s*6 = 1.30 min
-    this.time2 = 15000; // time inter - 15s*8 = 2 min
+    this.time1 = 10000; // time beg - 10s*6 = 1 min // line - 213 - method handleDifficulty
+    this.time2 = 15000; // time inter - 15s*4 = 1 min
     this.time3 = 25000; // time expert - 25s*infinty
     this.flag = 0;
 };
@@ -216,7 +216,7 @@ var fruits = function(game){
                 this.flag = 0;
                 this.timer_02.start();
             }
-            else if(flag == 8){
+            else if(flag == 4){
                 this.timer_02.stop();
                 this.flag = 0;
                 this.timer_03.start();

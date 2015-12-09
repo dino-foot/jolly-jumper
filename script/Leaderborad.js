@@ -18,6 +18,7 @@ leaderboardState.prototype = {
     create: function(){
         console.log('Leaderboard State');
         this.game.stage.backgroundColor = '#373F6C';
+        game.global.menuBgSound.stop();
         
         this.buildInterface();
        // this.Name = prompt('Tell Us Your Name ','nick name');

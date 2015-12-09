@@ -8,6 +8,7 @@ var helpState = function(game){
         
         create: function(){
             // console.log(game.state.getCurrentState());
+            game.global.menuBgSound.stop();
             
             this.howtoplay = this.add.sprite(this.world.centerX,this.world.centerY,'how-to-play');
             this.howtoplay.anchor.setTo(0.5);
