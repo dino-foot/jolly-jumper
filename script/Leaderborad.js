@@ -3,10 +3,9 @@ var leaderboardState = function(game){
     this.retriveData = 'Player';
     this.restartBtn;
     this.menuBtn;
-    this.Name = 'player';
     
-    this.style = { font: "bold 28px Arial", fill: "#fff", tabs: [ 100, 300 ] };
-    this.textStyle = { font: "22px Comic Sans MS",stroke: '#ffffff', strokeThickness: 4, fill: "#BE5446", tabs: [ 100, 300 ] };
+    this.style = { font: "bold 34px Arial", fill: "#fff", tabs: [ 100, 300 ] };
+    this.textStyle = { font: "28px Comic Sans MS",stroke: '#ffffff', strokeThickness: 4, fill: "#BE5446", tabs: [ 100, 300 ] };
     this.styleTextH = { font: "bold 58px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
     this.styleTextH2 = { font: "bold 36px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
     
@@ -21,15 +20,7 @@ leaderboardState.prototype = {
         game.global.menuBgSound.stop();
         
         this.buildInterface();
-       // this.Name = prompt('Tell Us Your Name ','nick name');
         
-        this.player = {
-        name:this.Name,
-        score: game.global.score  
-        };
-        
-        
-        //localStorage.setItem('player',JSON.stringify(this.player));
         this.showScore();
         
     },
@@ -67,13 +58,7 @@ leaderboardState.prototype = {
 	    barBottom.endFill();
 
 	    scoreText = this.add.text(5, 5, 'Highscore',this.styleTextH); 
-		scoreText.setShadow(2, 2, 'rgba(0,0,0,0.5)', 2);		
-        
-			  var Name = this.add.text(80,140,'Name',this.style);
-              Name.anchor.setTo(0.5,0.5);
-			  var Score = this.add.text(250,140,'Score',this.style);
-              Score.anchor.setTo(0.5,0.5);
-        
+		scoreText.setShadow(2, 2, 'rgba(0,0,0,0.5)', 2);		    
                    
 this.restartBtn = game.add.button(60,game.height-40,'restartBtn',function(){
 this.game.state.start('Play');
@@ -92,58 +77,20 @@ this.game.state.start('Menu');
     },
      
         showScore: function(){
-        var playerName;
         var playerScore;
-        var retriveDate;
-        var player1;
-           
-            if(!localStorage.getItem('player')){
-                this.Name = prompt('Tell Us Your Name ','nick name');
-                this.player = {
-                name: this.Name,
-                score: game.global.score
-                }
-                localStorage.setItem('player',JSON.stringify(this.player));
-                
-                retriveDate = localStorage.getItem('player');
-                player1 = JSON.parse(retriveDate); 
-               
-                    playerName = this.add.text(70,180,this.Name,this.textStyle);
-                    playerName.anchor.setTo(0.5,0.5);
-                    playerScore = this.add.text(255,180,game.global.score,this.textStyle);
-                    playerScore.anchor.setTo(0.5,0.5);
-                
-                console.log('player is  null'+player1);
-              //  console.log('player name'+this.Name);
-              //  console.log('player score'+game.global.score);
-                
-            }else{
-                retriveDate = localStorage.getItem('player');
-                player1 = JSON.parse(retriveDate); 
-                console.log(player1);
-          
-                if(game.global.score>player1.score){
-                    this.Name = prompt('Tell us Your Name ','nick name');
-                    this.player = {
-                    name: this.Name,
-                    score: game.global.score
-                    }
-                    localStorage.setItem('player',JSON.stringify(this.player));
-                    
-                    playerName = this.add.text(70,180,this.Name,this.textStyle);
-                    playerName.anchor.setTo(0.5,0.5);
-                    playerScore = this.add.text(255,180,game.global.score,this.textStyle);
-                    playerScore.anchor.setTo(0.5,0.5);
-                    console.log('highscore');
-                    return;
-                }
-                
-                console.log(player1);
-                playerName = this.add.text(70,180,player1.name,this.textStyle);
-                playerName.anchor.setTo(0.5,0.5);
-                playerScore = this.add.text(255,180,player1.score,this.textStyle);
-                playerScore.anchor.setTo(0.5,0.5); 
+             
+            if(localStorage.getItem('highscore')===null){
+                localStorage.setItem('highscore',game.global.score);
             }
+            else if(game.global.score>localStorage.getItem('highscore')){
+                  localStorage.setItem('highscore',game.global.score);        
+            }
+                    
+                playerScore = this.add.text(this.world.centerX,180,'Highscore - '+localStorage.getItem('highscore'),this.textStyle);
+                playerScore.anchor.setTo(0.5,0.5);
+            
+     var currentScore = this.add.text(this.world.centerX,250,'Your Score - '+game.global.score,this.textStyle);
+            currentScore.anchor.setTo(0.5);
             
             
         } // end showScore
