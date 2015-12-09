@@ -61,6 +61,9 @@ var loadState = function(game){
           this.load.image('devcredit','assets/credit/devcredit.png');
           this.load.image('shohan','assets/credit/shohan.png');
           
+          // how to play
+          this.load.image('how-to-play','assets/how-to-play.png');
+          
           // sounds
           this.load.audio('fruitGulp',['sounds/fruitGulp.wav','sounds/fruitGulp.ogg','sounds/fruitGulp.mp3','sounds/fruitGulp.m4a'],true);
           this.load.audio('menuBg',['sounds/menuBg.ogg','sounds/menuBg.wav','sounds/menuBg.mp3','sounds/menuBg.m4a'],true);

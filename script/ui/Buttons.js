@@ -42,7 +42,7 @@ this.playbtn = game.add.button(game.world.centerX,game.world.centerY,'play',this
         },
         
         handleHelp: function(){
-            
+          this.game.state.start('Help');  
         },
         
         handleCredit: function(){
