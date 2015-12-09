@@ -1,4 +1,5 @@
 var menuButtons = function(game){
+  this.game = game;    
   this.playbtn;
   this.creditbtn;    
   this.muteButton;
@@ -45,7 +46,7 @@ this.playbtn = game.add.button(game.world.centerX,game.world.centerY,'play',this
         },
         
         handleCredit: function(){
-            
+            this.game.state.start('Credit');
         },
                 
         muteSound: function(){
