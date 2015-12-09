@@ -59,6 +59,7 @@ var loadState = function(game){
           this.load.image('social-link','assets/credit/credit-social-link.png');
           this.load.image('code','assets/credit/code.png');
           this.load.image('devcredit','assets/credit/devcredit.png');
+          this.load.image('shohan','assets/credit/shohan.png');
           
           // sounds
           this.load.audio('fruitGulp',['sounds/fruitGulp.wav','sounds/fruitGulp.ogg','sounds/fruitGulp.mp3','sounds/fruitGulp.m4a'],true);
