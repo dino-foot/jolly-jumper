@@ -66,7 +66,7 @@ var playState = function(game){
          
         update: function(){
             this.jolly.update();
-            this.physics.arcade.collide(this.jolly.player,this.background.cactus,this.playerDead,null,this);
+            this.physics.arcade.overlap(this.jolly.player,this.background.cactus,this.playerDead,null,this);
             this.physics.arcade.collide(this.jolly.player,this.platforms.pltGroup,this.playerVsPlatform,null,this);
             this.jolly.handleMovement();
 
