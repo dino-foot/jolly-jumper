@@ -24,6 +24,7 @@ var playState = function(game){
             game.global.jumpSound = this.game.add.audio('jumpSound',1,false);
             game.global.gemSound = this.game.add.audio('gemSound',1,false);
             game.global.deadSound = this.game.add.audio('deadSound',1,false);
+            game.global.cocoSound = this.game.add.audio('cocoSound',1,false);
             
           this.background = new background(game);
           this.background.create(); 
@@ -135,6 +136,7 @@ var playState = function(game){
         },
         
         coconutVsPlayer: function(player,coconut){
+            game.global.cocoSound.play();
             var life = this.lifeGroup.getFirstExists(true);
             if(life){
                 life.kill();

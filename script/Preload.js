@@ -74,6 +74,8 @@ var loadState = function(game){
           
           this.load.audio('deadSound',['sounds/dead.mp3','sounds/dead.wav','sounds/dead.ogg','sounds/dead.m4a'],true);
           
+          this.load.audio('cocoSound',['sounds/dap.mp3','sounds/dap.wav','sounds/dap.ogg','sounds/dap.m4a'],true);
+          
           
       },
       

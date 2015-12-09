@@ -22,6 +22,7 @@ window.onload = function(){
         gemSound: null,
         jumpSound: null,
         deadSound: null,
+        cocoSound: null,
         mute: false,
         soundPlay: true,
         pltYMin: null
