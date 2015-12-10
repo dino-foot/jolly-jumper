@@ -9,11 +9,13 @@ Its my very first approach to be an indie game developer, hope you enjoyed this 
 
 ## Play It
 
-http://shohan4556.github.io/jolly-jumper/
+[Play on Github](http://shohan4556.github.io/jolly-jumper/)
 
-http://shohan4556.itch.io/jolly-jumper
+[Play on itch.io](http://shohan4556.itch.io/jolly-jumper)
 
-Supported Browser **Mozilla-firefox**, **Chrome** , **Opera**.
+[Play on Gamejolt](http://gamejolt.com/games/jolly-jumper/112782#close)
+
+**Supported Browser - Opera 33.0, Chrome - Version 47.0.2526.73, Firefox Version - 40.0.2.**
 
 ## Contributing
 
