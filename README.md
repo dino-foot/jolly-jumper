@@ -28,8 +28,9 @@ Design & Develop : Shohan
 
 ## License
 
-All copyright reserved my the Author. 
-contact : shohan4556@gmail.com
+All copyright reserved by the Author.
+
+For any query please contact : shohan4556@gmail.com
 
 ## Support on Beerpay
 Hey dude! Help me out for a couple of :beers:!
